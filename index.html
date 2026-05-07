@@ -16,12 +16,16 @@
     .hero { 
       background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
       color: white; 
-      padding: 50px 20px 40px; 
+      padding: 30px 20px 40px; 
       text-align: center;
     }
-    .hero h1 { font-size: 1.8rem; font-weight: 900; letter-spacing: -0.5px; }
-    .hero .tagline { color: #e63946; font-weight: 600; margin: 8px 0 20px; font-size: 0.95rem; }
-    .hero h2 { font-size: 2.5rem; line-height: 1.1; margin: 20px 0; font-weight: 900; }
+    .logo { 
+      width: 100%; 
+      max-width: 280px; 
+      margin: 0 auto 20px;
+      display: block;
+    }
+    .hero h2 { font-size: 2.3rem; line-height: 1.1; margin: 20px 0; font-weight: 900; }
     .hero p { font-size: 1.05rem; opacity: 0.9; margin-bottom: 30px; }
     .btn { 
       background: #e63946; 
@@ -84,7 +88,6 @@
       padding: 14px; 
       border-radius: 8px; 
       font-weight: 600;
-      cursor: pointer;
     }
     .area-btn.active { 
       background: #e63946; 
@@ -128,6 +131,7 @@
       padding: 40px 20px 20px;
       font-size: 0.9rem;
     }
+    .footer-logo { width: 200px; margin-bottom: 20px; }
     .footer h4 { color: white; margin: 25px 0 12px; font-size: 1rem; }
     .footer a { color: #e63946; text-decoration: none; }
     .footer .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -154,8 +158,7 @@
 
   <div class="hero">
     <div class="container">
-      <h1>EPIC COURIERS</h1>
-      <div class="tagline">Fast. Reliable. Professional. · Same-Day Gauteng</div>
+      <img src="logo.png" alt="Epic Couriers - Fast. Reliable. Professional." class="logo">
       <h2>THE LAST<br>MILE,<br>FIRST CLASS.</h2>
       <p>Epic Couriers is a Gauteng-based, tech-enabled courier service built for SMEs and online stores underserved by large couriers. Same-day delivery with a 12:00 PM cut-off, 98% on-time target.</p>
       <a href="PASTE_YOUR_BASE44_LINK_HERE" class="btn">Book a Delivery</a>
@@ -284,7 +287,7 @@
 
   <div class="footer">
     <div class="container">
-      <h3 style="color: white; font-size: 1.3rem; margin-bottom: 10px;">Epic Couriers</h3>
+      <img src="logo.png" alt="Epic Couriers" class="footer-logo">
       <p>Fast. Reliable. Professional.</p>
       <p style="margin: 15px 0;">Same-day delivery for Gauteng SMEs and online stores. No minimums. No surcharge shocks.</p>
       
