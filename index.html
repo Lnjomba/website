@@ -1,28 +1,92 @@
-export async function onRequestPost(context) {
-  const data = await context.request.json();
-  
-  // Add server-side fields
-  data.status = 'pending';
-  data.created_date = new Date().toISOString();
-  
-  // Call Base44 API - PUT YOUR API KEY IN CLOUDFLARE ENV VARS
-  const res = await fetch('https://api.base44.com/entities/Booking', {
-    method: 'POST',
-    headers: { 
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${context.env.BASE44_API_KEY}` 
-    },
-    body: JSON.stringify(data)
-  });
-  
-  if (res.ok) {
-    return new Response(JSON.stringify({ success: true }), { 
-      headers: { 'Content-Type': 'application/json' } 
-    });
-  } else {
-    return new Response(JSON.stringify({ error: 'Failed' }), { 
-      status: 500,
-      headers: { 'Content-Type': 'application/json' } 
-    });
-  }
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Epic Couriers - Same-Day Delivery Gauteng</title>
+  <style>
+    body { 
+      font-family: system-ui, -apple-system, sans-serif; 
+      margin: 0; 
+      background: #f8f9fa;
+      color: #212529;
+    }
+    .wrap { 
+      max-width: 600px; 
+      margin: 0 auto; 
+      padding: 20px; 
+    }
+    .hero { 
+      background: linear-gradient(135deg, #e63946, #d62828);
+      color: white; 
+      padding: 60px 20px; 
+      text-align: center;
+      border-radius: 12px;
+      margin-bottom: 30px;
+    }
+    .hero h1 { font-size: 2.2rem; margin: 0 0 10px 0; }
+    .hero p { font-size: 1.1rem; opacity: 0.95; margin-bottom: 25px; }
+    .btn { 
+      background: white; 
+      color: #e63946; 
+      padding: 16px 32px; 
+      text-decoration: none; 
+      border-radius: 8px; 
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: inline-block;
+      width: 80%;
+      max-width: 300px;
+    }
+    .services { 
+      background: white; 
+      padding: 25px; 
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+    .services h2 { color: #1a1a1a; margin-top: 0; }
+    .services li { margin: 12px 0; font-size: 1.05rem; }
+    .footer { 
+      text-align: center; 
+      padding: 30px 20px;
+      color: #6c757d;
+    }
+    .footer a { color: #e63946; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="hero">
+      <h1>EPIC COURIERS</h1>
+      <p>Premium same-day delivery for SMEs across Gauteng</p>
+      <a href="PASTE_YOUR_BASE44_LINK_HERE" class="btn">
+        Book a Delivery Now
+      </a>
+    </div>
+
+    <div class="services">
+      <h2>Our Services</h2>
+      <ul>
+        <li>🚚 <strong>Same-Day Express</strong> - Boksburg, Benoni, Germiston</li>
+        <li>📦 <strong>SME Regular</strong> - Scheduled daily routes</li>
+        <li>🛍️ <strong>E-commerce Fulfillment</strong> - For online shops</li>
+        <li>📄 <strong>Document Delivery</strong> - Secure + tracked</li>
+      </ul>
+    </div>
+
+    <div class="services">
+      <h2>Coverage Areas</h2>
+      <p>Boksburg • East Rand • Alberton • Germiston • Johannesburg • Brakpan • Springs • Benoni</p>
+    </div>
+
+    <div class="footer">
+      <p><strong>Epic Couriers</strong></p>
+      <p>
+        <a href="tel:+27110000000">011 000 0000</a> | 
+        <a href="mailto:info@epiccouriers.co.za">Email Us</a>
+      </p>
+      <p>© 2026 Epic Couriers</p>
+    </div>
+  </div>
+</body>
+</html>
