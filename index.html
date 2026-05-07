@@ -8,315 +8,737 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { 
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-      line-height: 1.6; 
-      color: #1a1a1a; 
-      background: #fff;
+      background: #0F172A;
+      color: #E2E8F0;
+      line-height: 1.5;
     }
-    .container { max-width: 600px; margin: 0 auto; padding: 0 16px; }
-    .hero { 
-      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-      color: white; 
-      padding: 30px 20px 40px; 
-      text-align: center;
+    .container { max-width: 600px; margin: 0 auto; padding: 0 20px; }
+    
+    /* Header */
+    .header { 
+      background: #0F172A;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #1E293B;
     }
-    .logo { 
-      width: 100%; 
-      max-width: 280px; 
-      margin: 0 auto 20px;
+    .header-logo { width: 140px; }
+    .menu-icon { width: 24px; height: 24px; color: white; }
+    
+    /* Hero */
+    .hero { padding: 40px 20px 30px; }
+    .tagline { 
+      color: #94A3B8; 
+      font-size: 0.75rem; 
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
       display: block;
     }
-    .hero h2 { font-size: 2.3rem; line-height: 1.1; margin: 20px 0; font-weight: 900; }
-    .hero p { font-size: 1.05rem; opacity: 0.9; margin-bottom: 30px; }
-    .btn { 
-      background: #e63946; 
+    .hero h1 { 
+      font-size: 2.8rem; 
+      font-weight: 900; 
+      line-height: 1.1; 
+      color: white;
+      margin-bottom: 24px;
+    }
+    .hero h1 .orange { color: #F97316; }
+    .hero p { 
+      color: #CBD5E1; 
+      font-size: 1rem; 
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+    .btn-primary { 
+      background: #F97316; 
       color: white; 
-      padding: 16px 28px; 
-      text-decoration: none; 
-      border-radius: 8px; 
+      padding: 16px 24px; 
+      border-radius: 12px; 
       font-weight: 700;
-      display: inline-block;
-      margin: 5px;
+      text-decoration: none; 
+      display: block;
+      text-align: center;
+      margin-bottom: 12px;
       font-size: 1rem;
     }
-    .btn-outline { 
-      background: transparent; 
-      border: 2px solid white;
+    .btn-secondary { 
+      background: #1E293B; 
+      color: white; 
+      padding: 16px 24px; 
+      border-radius: 12px; 
+      font-weight: 700;
+      text-decoration: none; 
+      display: block;
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 1rem;
     }
+    
+    /* Stats Grid */
     .stats { 
       display: grid; 
-      grid-template-columns: repeat(2, 1fr); 
-      gap: 20px; 
-      padding: 40px 20px;
-      background: #f8f9fa;
-      text-align: center;
-    }
-    .stat h3 { font-size: 2rem; color: #e63946; font-weight: 900; }
-    .stat p { font-size: 0.85rem; color: #6c757d; margin-top: 5px; }
-    .section { padding: 50px 20px; }
-    .section h2 { font-size: 1.8rem; margin-bottom: 10px; font-weight: 900; }
-    .section .sub { color: #e63946; font-weight: 600; font-size: 0.9rem; margin-bottom: 30px; }
-    .card { 
-      background: #f8f9fa; 
-      padding: 25px; 
-      border-radius: 12px; 
-      margin-bottom: 20px;
-      border-left: 4px solid #e63946;
-    }
-    .card h3 { font-size: 1.3rem; margin-bottom: 12px; }
-    .card .tag { 
-      background: #e63946; 
-      color: white; 
-      font-size: 0.75rem; 
-      padding: 4px 10px; 
-      border-radius: 4px;
-      display: inline-block;
-      margin-bottom: 10px;
-      font-weight: 700;
-    }
-    .card ul { list-style: none; margin-top: 15px; }
-    .card li { padding: 6px 0; color: #495057; }
-    .card li:before { content: "✓ "; color: #e63946; font-weight: 900; margin-right: 8px; }
-    .areas { 
-      display: grid; 
-      grid-template-columns: repeat(2, 1fr); 
+      grid-template-columns: 1fr 1fr; 
       gap: 12px;
-      margin-top: 20px;
-    }
-    .area-btn { 
-      background: white; 
-      border: 2px solid #dee2e6; 
-      padding: 14px; 
-      border-radius: 8px; 
-      font-weight: 600;
-    }
-    .area-btn.active { 
-      background: #e63946; 
-      color: white; 
-      border-color: #e63946; 
-    }
-    .area-detail { 
-      background: #1a1a1a; 
-      color: white; 
-      padding: 25px; 
-      border-radius: 12px; 
-      margin-top: 20px;
-    }
-    .process { counter-reset: step; }
-    .step { 
-      position: relative; 
-      padding-left: 60px; 
       margin-bottom: 30px;
     }
-    .step:before { 
-      counter-increment: step;
-      content: "0" counter(step);
-      position: absolute;
-      left: 0;
-      top: 0;
-      background: #e63946;
+    .stat { 
+      background: #1E293B; 
+      padding: 20px; 
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .stat-icon { 
+      width: 20px; 
+      height: 20px; 
+      color: #F97316;
+      flex-shrink: 0;
+    }
+    .stat-text h3 { color: white; font-size: 1.1rem; font-weight: 700; }
+    .stat-text p { color: #94A3B8; font-size: 0.8rem; }
+    
+    /* Orange Banner */
+    .banner { 
+      background: #F97316; 
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .banner-item { 
+      display: flex; 
+      align-items: center; 
+      gap: 10px;
       color: white;
-      width: 45px;
-      height: 45px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .banner-icon { width: 18px; height: 18px; }
+    
+    /* White Section */
+    .white-section { 
+      background: white; 
+      color: #0F172A;
+      padding: 50px 20px;
+    }
+    .section-label { 
+      color: #F97316; 
+      font-size: 0.75rem; 
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .section-title { 
+      font-size: 2rem; 
+      font-weight: 900; 
+      line-height: 1.2;
+      margin-bottom: 16px;
+      color: #0F172A;
+    }
+    .section-title .orange { color: #F97316; }
+    .section-desc { 
+      color: #475569; 
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+    
+    /* Service Cards */
+    .service-card { 
+      background: #F8FAFC; 
+      border-radius: 16px; 
+      padding: 24px;
+      margin-bottom: 16px;
+      border: 1px solid #E2E8F0;
+    }
+    .service-tag { 
+      background: #FFF7ED; 
+      color: #F97316; 
+      font-size: 0.7rem; 
+      font-weight: 700;
+      padding: 4px 10px; 
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+    }
+    .service-icon { 
+      width: 32px; 
+      height: 32px; 
+      background: #FFF7ED;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      color: #F97316;
+    }
+    .service-card h3 { 
+      font-size: 1.3rem; 
+      margin-bottom: 8px;
+      color: #0F172A;
+    }
+    .service-card .subtitle { 
+      color: #64748B; 
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+    .service-card p { 
+      color: #475569; 
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .service-locations { 
+      background: white;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: #64748B;
+      font-family: monospace;
+    }
+    
+    /* Stats Dark */
+    .stats-dark { 
+      display: grid; 
+      grid-template-columns: 1fr 1fr; 
+      gap: 12px;
+      margin: 40px 0;
+    }
+    .stat-dark { 
+      background: #1E293B; 
+      padding: 24px; 
+      border-radius: 12px;
+      text-align: center;
+    }
+    .stat-dark h3 { 
+      font-size: 2rem; 
+      color: #F97316; 
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+    .stat-dark p { 
+      color: #94A3B8; 
+      font-size: 0.8rem;
+    }
+    
+    /* Network Section */
+    .network { 
+      background: #0F172A; 
+      padding: 50px 20px;
+    }
+    .network h2 { 
+      font-size: 2rem; 
+      font-weight: 900; 
+      color: white;
+      margin-bottom: 12px;
+    }
+    .network h2 .orange { color: #F97316; }
+    .network p { color: #CBD5E1; margin-bottom: 30px; }
+    
+    .map-container { 
+      background: #1E293B; 
+      border-radius: 16px; 
+      padding: 30px 20px;
+      margin-bottom: 20px;
+      min-height: 280px;
+      position: relative;
+    }
+    .map-dots { 
+      position: relative;
+      width: 100%;
+      height: 220px;
+    }
+    .dot { 
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: #F97316;
+      border-radius: 50%;
+    }
+    .dot-label { 
+      position: absolute;
+      font-size: 0.7rem;
+      color: #94A3B8;
+      margin-top: 12px;
+      margin-left: -20px;
+    }
+    .dot.active { 
+      width: 12px; 
+      height: 12px; 
+      background: #F97316;
+      box-shadow: 0 0 0 4px rgba(249,115,22,0.3);
+    }
+    .dot.active + .dot-label { 
+      color: #F97316; 
+      font-weight: 700;
+    }
+    
+    .area-info { 
+      background: #1E293B; 
+      border-radius: 16px; 
+      padding: 24px;
+      margin-bottom: 12px;
+    }
+    .zone-tag { 
+      background: rgba(249,115,22,0.2); 
+      color: #F97316; 
+      font-size: 0.7rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .area-info h3 { 
+      font-size: 1.5rem; 
+      color: white;
+      margin-bottom: 8px;
+    }
+    .area-info .time { 
+      color: #F97316; 
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+    .area-info p { color: #CBD5E1; font-size: 0.95rem; }
+    
+    .area-list { background: #1E293B; border-radius: 16px; }
+    .area-row { 
+      padding: 16px 20px;
+      border-bottom: 1px solid #334155;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .area-row:last-child { border-bottom: none; }
+    .area-name { color: white; font-weight: 600; }
+    .area-time { color: #94A3B8; font-size: 0.85rem; }
+    .area-zone { 
+      background: #334155; 
+      color: #CBD5E1; 
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+    }
+    
+    /* Process */
+    .process { background: white; padding: 50px 20px; }
+    .process-step { 
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .step-number { 
+      width: 60px;
+      height: 60px;
+      background: #FFF7ED;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      margin: 0 auto 20px;
+      color: #F97316;
       font-weight: 900;
-      font-size: 1.1rem;
+      font-size: 1.3rem;
     }
-    .step h3 { font-size: 1.2rem; margin-bottom: 8px; }
-    .footer { 
-      background: #1a1a1a; 
-      color: #adb5bd; 
-      padding: 40px 20px 20px;
+    .process-step h3 { 
+      font-size: 1.2rem; 
+      color: #0F172A;
+      margin-bottom: 12px;
+    }
+    .process-step p { 
+      color: #64748B; 
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    /* Booking Form */
+    .booking { 
+      background: white; 
+      padding: 50px 20px;
+    }
+    .form-steps { 
+      display: flex;
+      justify-content: space-between;
+      margin: 30px 0;
+      position: relative;
+    }
+    .form-steps:before { 
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #E2E8F0;
+      z-index: 0;
+    }
+    .form-step { 
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .form-step-num { 
+      width: 32px;
+      height: 32px;
+      background: #E2E8F0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 8px;
+      color: #94A3B8;
+      font-weight: 700;
       font-size: 0.9rem;
     }
-    .footer-logo { width: 200px; margin-bottom: 20px; }
-    .footer h4 { color: white; margin: 25px 0 12px; font-size: 1rem; }
-    .footer a { color: #e63946; text-decoration: none; }
-    .footer .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .footer .bottom { 
-      border-top: 1px solid #343a40; 
-      margin-top: 30px; 
-      padding-top: 20px; 
-      text-align: center;
-      font-size: 0.8rem;
+    .form-step.active .form-step-num { 
+      background: #F97316; 
+      color: white;
     }
-    .badge { 
-      display: inline-block; 
-      background: #28a745; 
-      color: white; 
-      padding: 6px 12px; 
-      border-radius: 6px; 
-      font-size: 0.8rem; 
+    .form-step label { 
+      font-size: 0.75rem; 
+      color: #64748B;
+    }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { 
+      display: block;
+      color: #0F172A;
       font-weight: 600;
-      margin: 5px 5px 5px 0;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+    .form-group input { 
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: #F8FAFC;
+    }
+    .btn-next { 
+      background: #0F172A; 
+      color: white; 
+      padding: 16px 32px;
+      border-radius: 12px;
+      border: none;
+      font-weight: 700;
+      width: 100%;
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+    
+    /* CTA */
+    .cta { 
+      background: #0F172A; 
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .cta-label { 
+      color: #F97316; 
+      font-size: 0.75rem; 
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+    .cta h2 { 
+      font-size: 2.2rem; 
+      font-weight: 900; 
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 30px;
+    }
+    .cta h2 .orange { color: #F97316; }
+    
+    /* Footer */
+    .footer { 
+      background: #0F172A; 
+      padding: 40px 20px 20px;
+      border-top: 1px solid #1E293B;
+    }
+    .footer-logo { width: 160px; margin-bottom: 20px; }
+    .footer-desc { 
+      color: #94A3B8; 
+      font-size: 0.9rem;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+    .footer-section { margin-bottom: 30px; }
+    .footer-title { 
+      color: #F97316; 
+      font-size: 0.75rem; 
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+    .footer-link { 
+      color: #CBD5E1; 
+      text-decoration: none;
+      display: block;
+      padding: 6px 0;
+      font-size: 0.9rem;
+    }
+    .contact-item { 
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #CBD5E1;
+      padding: 8px 0;
+      font-size: 0.9rem;
+    }
+    .contact-icon { color: #F97316; width: 18px; }
+    .footer-bottom { 
+      border-top: 1px solid #1E293B; 
+      margin-top: 30px;
+      padding-top: 20px;
+      text-align: center;
+      color: #64748B;
+      font-size: 0.8rem;
+      line-height: 1.6;
     }
   </style>
 </head>
 <body>
 
-  <div class="hero">
+  <div class="header">
+    <img src="logo.png" alt="Epic Couriers" class="header-logo">
+    <svg class="menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>
+  </div>
+
+  <div class="hero container">
+    <span class="tagline">Fast. Reliable. Professional. · Same-Day Gauteng</span>
+    <h1>THE LAST<br>MILE,<br><span class="orange">FIRST CLASS.</span></h1>
+    <p>Epic Couriers is a Gauteng-based, tech-enabled courier service built for SMEs and online stores underserved by large couriers. Same-day delivery with a 12:00 PM cut-off, 98% on-time target.</p>
+    <a href="PASTE_YOUR_BASE44_LINK_HERE" class="btn-primary">Book a Delivery →</a>
+    <a href="#services" class="btn-secondary">Our Services</a>
+  </div>
+
+  <div class="container">
+    <div class="stats">
+      <div class="stat">
+        <svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <div class="stat-text">
+          <h3>12:00 PM</h3>
+          <p>Same-Day Cut-off</p>
+        </div>
+      </div>
+      <div class="stat">
+        <svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+        <div class="stat-text">
+          <h3>8 Areas</h3>
+          <p>Gauteng Coverage</p>
+        </div>
+      </div>
+      <div class="stat">
+        <svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <div class="stat-text">
+          <h3>98%</h3>
+          <p>On-Time Target</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="banner">
+    <div class="banner-item">
+      <svg class="banner-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      Proof of Delivery on Every Job
+    </div>
+    <div class="banner-item">
+      <svg class="banner-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      CIPC Registered · BBBEE Level 1
+    </div>
+    <div class="banner-item">
+      <svg class="banner-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+      WhatsApp & Web Booking
+    </div>
+    <div class="banner-item">
+      <svg class="banner-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      100% Black-Owned Business
+    </div>
+  </div>
+
+  <div class="white-section" id="services">
     <div class="container">
-      <img src="logo.png" alt="Epic Couriers - Fast. Reliable. Professional." class="logo">
-      <h2>THE LAST<br>MILE,<br>FIRST CLASS.</h2>
-      <p>Epic Couriers is a Gauteng-based, tech-enabled courier service built for SMEs and online stores underserved by large couriers. Same-day delivery with a 12:00 PM cut-off, 98% on-time target.</p>
-      <a href="PASTE_YOUR_BASE44_LINK_HERE" class="btn">Book a Delivery</a>
-      <a href="#services" class="btn btn-outline">Our Services</a>
-    </div>
-  </div>
+      <div class="section-label">— WHAT WE DELIVER</div>
+      <h2 class="section-title">Precision Services<br><span class="orange">For Every Need.</span></h2>
+      <p class="section-desc">Built for Gauteng SMEs and online stores underserved by large couriers. No volume minimums. Transparent pricing. Real accountability.</p>
 
-  <div class="stats">
-    <div class="stat">
-      <h3>12:00 PM</h3>
-      <p>Same-Day Cut-off</p>
-    </div>
-    <div class="stat">
-      <h3>8 Areas</h3>
-      <p>Gauteng Coverage</p>
-    </div>
-    <div class="stat">
-      <h3>98%</h3>
-      <p>On-Time Target</p>
-    </div>
-    <div class="stat">
-      <h3>POD</h3>
-      <p>On Every Job</p>
-    </div>
-  </div>
-
-  <div class="container" style="padding: 20px; text-align: center;">
-    <span class="badge">CIPC Registered</span>
-    <span class="badge">BBBEE Level 1</span>
-    <span class="badge">WhatsApp & Web Booking</span>
-    <span class="badge">100% Black-Owned</span>
-  </div>
-
-  <div class="section container" id="services">
-    <div class="sub">— What We Deliver</div>
-    <h2>Precision Services<br>For Every Need.</h2>
-    <p style="color: #6c757d; margin-bottom: 30px;">Built for Gauteng SMEs and online stores underserved by large couriers. No volume minimums. Transparent pricing. Real accountability.</p>
-
-    <div class="card">
-      <span class="tag">Most Popular</span>
-      <h3>Same-Day Delivery</h3>
-      <p style="color: #6c757d; margin-bottom: 15px;">Delivered today. 12:00 PM cut-off.</p>
-      <p>Door-to-door same-day delivery across Gauteng metros. Book before noon and your parcel moves immediately — with a 98% on-time target.</p>
-      <ul>
-        <li>Boksburg · Brakpan · Springs · Benoni</li>
-        <li>East Rand · Alberton · Germiston · JHB</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3>Scheduled SME Runs</h3>
-      <p style="color: #6c757d; margin-bottom: 15px;">Daily or weekly contracts.</p>
-      <p>No minimum volume. Dedicated account management for SMEs doing 20–200 parcels per month who deserve better than the big couriers offer.</p>
-      <ul>
-        <li>Transparent per-km + per-stop pricing</li>
-        <li>No surcharge shocks</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h3>E-commerce Fulfilment</h3>
-      <p style="color: #6c757d; margin-bottom: 15px;">Pick, pack, dispatch.</p>
-      <p>Full last-mile delivery solution for online stores. Proof-of-delivery on every job, live GPS tracking, and instant booking via WhatsApp or web.</p>
-      <ul>
-        <li>Shopify · WooCommerce · Custom stores</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="section" style="background: #f8f9fa;">
-    <div class="container">
-      <div class="sub">— The Gauteng Pulse</div>
-      <h2>Your Delivery Network.</h2>
-      <p style="color: #6c757d; margin-bottom: 20px;">Same-day cut-off 12:00 PM. Serving Boksburg, Benoni, Brakpan, Springs, East Rand, Alberton, Germiston and greater Johannesburg.</p>
-      
-      <div class="areas">
-        <button class="area-btn active">Boksburg</button>
-        <button class="area-btn">East Rand</button>
-        <button class="area-btn">Germiston</button>
-        <button class="area-btn">Alberton</button>
-        <button class="area-btn">Johannesburg</button>
-        <button class="area-btn">Brakpan</button>
-        <button class="area-btn">Springs</button>
-        <button class="area-btn">Benoni</button>
+      <div class="service-card">
+        <span class="service-tag">MOST POPULAR</span>
+        <div class="service-icon">⚡</div>
+        <h3>Same-Day Delivery</h3>
+        <div class="subtitle">Delivered today. 12:00 PM cut-off.</div>
+        <p>Door-to-door same-day delivery across Gauteng metros. Book before noon and your parcel moves immediately — with a 98% on-time target.</p>
+        <div class="service-locations">Boksburg · Brakpan · Springs · Benoni · East Rand · Alberton · Germiston · JHB</div>
       </div>
 
-      <div class="area-detail">
-        <div style="color: #e63946; font-weight: 700; font-size: 0.9rem; margin-bottom: 10px;">Zone A · Our Home Base</div>
-        <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Boksburg</h3>
-        <p style="opacity: 0.8; margin-bottom: 15px;">1–2 hours</p>
+      <div class="service-card">
+        <span class="service-tag">BUSINESS</span>
+        <div class="service-icon">📋</div>
+        <h3>Scheduled SME Runs</h3>
+        <div class="subtitle">Daily or weekly contracts.</div>
+        <p>No minimum volume. Dedicated account management for SMEs doing 20–200 parcels per month who deserve better than the big couriers offer.</p>
+        <div class="service-locations">Transparent per-km + per-stop pricing, no surcharge shocks</div>
+      </div>
+
+      <div class="service-card">
+        <span class="service-tag">ONLINE SHOPS</span>
+        <div class="service-icon">🛍️</div>
+        <h3>E-commerce Fulfilment</h3>
+        <div class="subtitle">Pick, pack, dispatch.</div>
+        <p>Full last-mile delivery solution for online stores. Proof-of-delivery on every job, live GPS tracking, and instant booking via WhatsApp or web.</p>
+        <div class="service-locations">Shopify · WooCommerce · Custom stores</div>
+      </div>
+
+      <div class="stats-dark">
+        <div class="stat-dark">
+          <h3>660+</h3>
+          <p>Capacity Per Month</p>
+        </div>
+        <div class="stat-dark">
+          <h3>98%</h3>
+          <p>On-Time Target</p>
+        </div>
+        <div class="stat-dark">
+          <h3>5</h3>
+          <p>Coverage Areas</p>
+        </div>
+        <div class="stat-dark">
+          <h3>12 PM</h3>
+          <p>Same-Day Cut-off</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="network">
+    <div class="container">
+      <div class="section-label">— THE GAUTENG PULSE</div>
+      <h2>Your Delivery<br><span class="orange">Network.</span></h2>
+      <p>Same-day cut-off 12:00 PM. Serving Boksburg, Benoni, Brakpan, Springs, East Rand, Alberton, Germiston and greater Johannesburg. Select an area to explore.</p>
+      
+      <div class="map-container">
+        <div class="map-dots">
+          <div class="dot" style="top: 40%; left: 65%;"><span class="dot-label">JHB</span></div>
+          <div class="dot" style="top: 50%; left: 55%;"><span class="dot-label">Germiston</span></div>
+          <div class="dot" style="top: 45%; left: 75%;"><span class="dot-label">Benoni</span></div>
+          <div class="dot" style="top: 55%; left: 70%;"><span class="dot-label">East Rand</span></div>
+          <div class="dot active" style="top: 60%; left: 50%;"><span class="dot-label">Boksburg</span></div>
+          <div class="dot" style="top: 50%; left: 80%;"><span class="dot-label">Brakpan</span></div>
+          <div class="dot" style="top: 55%; left: 85%;"><span class="dot-label">Springs</span></div>
+          <div class="dot" style="top: 70%; left: 60%;"><span class="dot-label">Alberton</span></div>
+        </div>
+        <p style="color: #64748B; font-size: 0.8rem; text-align: center; margin-top: 20px;">Click an area to explore</p>
+      </div>
+
+      <div class="area-info">
+        <span class="zone-tag">ZONE A</span>
+        <h3>Boksburg</h3>
+        <span class="time">1-2 hours</span>
+        <p><strong>Our Home Base</strong></p>
         <p>Fastest coverage from our Boksburg depot. Same-day guaranteed for all local pickups.</p>
+        <a href="PASTE_YOUR_BASE44_LINK_HERE" class="btn-primary" style="margin-top: 16px;">Book delivery to Boksburg</a>
+      </div>
+
+      <div class="area-list">
+        <div class="area-row">
+          <span class="area-name">Boksburg</span>
+          <span class="area-time">1-2 hours</span>
+          <span class="area-zone">Zone A</span>
+        </div>
+        <div class="area-row">
+          <span class="area-name">East Rand</span>
+          <span class="area-time">1-3 hours</span>
+          <span class="area-zone">Zone A</span>
+        </div>
+        <div class="area-row">
+          <span class="area-name">Germiston</span>
+          <span class="area-time">2-3 hours</span>
+          <span class="area-zone">Zone B</span>
+        </div>
+        <div class="area-row">
+          <span class="area-name">Alberton</span>
+          <span class="area-time">2-3 hours</span>
+          <span class="area-zone">Zone B</span>
+        </div>
+        <div class="area-row">
+          <span class="area-name">Johannesburg</span>
+          <span class="area-time">3-4 hours</span>
+          <span class="area-zone">Zone C</span>
+        </div>
+        <div class="area-row">
+          <span class="area-name">Brakpan</span>
+          <span class="area-time">1-2 hours</span>
+          <span class="area-zone">Zone A</span>
+        </div>
+        <div class="area-row">
+          <span class="area-name">Springs</span>
+          <span class="area-time">2-3 hours</span>
+          <span class="area-zone">Zone B</span>
+        </div>
+        <div class="area-row">
+          <span class="area-name">Benoni</span>
+          <span class="area-time">1-2 hours</span>
+          <span class="area-zone">Zone A</span>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="section container">
-    <div class="sub">— The Process</div>
-    <h2>Four Steps to Delivered.</h2>
-    <div class="process" style="margin-top: 40px;">
-      <div class="step">
-        <h3>Book by 12 PM</h3>
-        <p style="color: #6c757d;">Submit your booking online or via WhatsApp before noon. Pickup and delivery details confirmed instantly.</p>
-      </div>
-      <div class="step">
-        <h3>We Dispatch</h3>
-        <p style="color: #6c757d;">A dedicated Epic Couriers driver is assigned and en route to your pickup address — same day.</p>
-      </div>
-      <div class="step">
-        <h3>Live Tracking</h3>
-        <p style="color: #6c757d;">Your parcel is GPS-tracked from collection to drop-off. You and your recipient stay informed every step.</p>
-      </div>
-      <div class="step">
-        <h3>Delivered + POD</h3>
-        <p style="color: #6c757d;">Proof of delivery is captured and sent to you immediately. Every. Single. Job.</p>
-      </div>
-    </div>
-    <a href="PASTE_YOUR_BASE44_LINK_HERE" class="btn" style="width: 100%; text-align: center; margin-top: 20px;">Start Your First Delivery</a>
-  </div>
-
-  <div class="hero" style="padding: 60px 20px;">
+  <div class="process">
     <div class="container">
-      <h2 style="font-size: 2rem;">Ready to ship?<br>LET'S MOVE<br>YOUR FREIGHT.</h2>
-      <a href="PASTE_YOUR_BASE44_LINK_HERE" class="btn" style="margin-top: 25px;">Book a Delivery</a>
-    </div>
-  </div>
-
-  <div class="footer">
-    <div class="container">
-      <img src="logo.png" alt="Epic Couriers" class="footer-logo">
-      <p>Fast. Reliable. Professional.</p>
-      <p style="margin: 15px 0;">Same-day delivery for Gauteng SMEs and online stores. No minimums. No surcharge shocks.</p>
+      <div class="section-label">— THE PROCESS</div>
+      <h2 class="section-title">Four Steps to<br><span class="orange">Delivered.</span></h2>
       
-      <div class="grid">
-        <div>
-          <h4>— Services</h4>
-          <p>Same-Day Express<br>SME Solutions<br>E-commerce Fulfillment<br>Bulk Deliveries</p>
-        </div>
-        <div>
-          <h4>— Coverage</h4>
-          <p>Boksburg<br>East Rand<br>Alberton<br>Germiston<br>Johannesburg<br>Brakpan<br>Springs<br>Benoni</p>
-        </div>
+      <div class="process-step">
+        <div class="step-number">01</div>
+        <h3>Book by 12 PM</h3>
+        <p>Submit your booking online or via WhatsApp before noon. Pickup and delivery details confirmed instantly.</p>
       </div>
-
-      <h4>— Contact Manifest</h4>
-      <p>
-        Boksburg, East Rand<br>
-        Gauteng, South Africa<br>
-        <a href="tel:0691711112">069 171 1112</a><br>
-        <a href="mailto:info@epiccouriers.co.za">info@epiccouriers.co.za</a><br>
-        <a href="https://www.epiccouriers.co.za">www.epiccouriers.co.za</a>
-      </p>
-
-      <div class="bottom">
-        <p>© 2026 Epic Couriers (Pty) Ltd. All rights reserved. Boksburg, Gauteng.</p>
-        <p style="margin-top: 8px;">Reg: 2025/424904/07 · BBBEE Level 1 · Mon–Fri 07:00–17:00 · Sat 08:00–13:00</p>
+      
+      <div class="process-step">
+        <div class="step-number">02</div>
+        <h3>We Dispatch</h3>
+        <p>A dedicated Epic Couriers driver is assigned and en route to your pickup address — same day.</p>
       </div>
+      
+      <div class="process-step">
+        <div class="step-number">03</div>
+        <h3>Live Tracking</h3>
+        <p>Your parcel is GPS-tracked from collection to drop-off. You and your recipient stay informed every step.</p>
+      </div>
+      
+      <div class="process-step">
+        <div class="step-number">04</div>
+        <h3>Delivered + POD</h3>
+        <p>Proof of delivery is captured and sent to you immediately. Every. Single. Job.</p>
+      </div>
+      
+      <a href="PASTE_YOUR_BASE44_LINK_HERE" class="btn-primary">Start Your First Delivery</a>
     </div>
   </div>
 
-</body>
-</html>
+  <div class="booking">
+    <div class="container">
+      <div class="section-label">— FRICTIONLESS INTAKE</div>
+      <h2 class="section-title">Book a Delivery<br><span class="orange">Right Now.</span></h2>
+      <p class="section-desc">Same-day pickup available. Takes under 2 minutes.</p>
+      
+      <div class="form-steps">
+        <div class="form-step active">
+          <div class="form-step-num">1</div>
+          <label>Contact</label>
+        </div>
+        <div class="form-step">
+          <div class="form-step-num">2</div>
+          <label>Pickup</label>
+        </div>
+        <div class="form-step">
+          <div class="form-step-num">3</div>
+          <label>Delivery</label>
+        </div>
+        <div class="form-step">
+          <div class="form-step
