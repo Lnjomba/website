@@ -7,12 +7,11 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<!-- Firebase -->
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
-<!-- Google Maps -->
 <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_KEY&libraries=places"></script>
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
 
 <script>
 tailwind.config = {
@@ -22,6 +21,7 @@ tailwind.config = {
         'epic-blue': '#5DADE2',
         'epic-gold': '#D4A017',
         'epic-charcoal': '#1A1A1B',
+        'epic-light': '#F8F9FA',
       }
     }
   }
@@ -29,421 +29,418 @@ tailwind.config = {
 </script>
 
 <style>
-body { font-family: 'Inter', sans-serif; }
+body { font-family: 'Inter', sans-serif; background: #F8F9FA; color: #1A1A1B; }
 .text-gradient { background: linear-gradient(90deg, #5DADE2 0%, #D4A017 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.gold-glow { box-shadow: 0 0 20px rgba(212, 160, 23, 0.4); }
-.blue-glow { box-shadow: 0 20px rgba(93, 173, 226, 0.3); }
-.hero-pattern { background-color: #1A1A1B; background-image: radial-gradient(#5DADE215 1px, transparent 1px); background-size: 30px 30px; }
-.step-active { background: #D4A017; color: #1A1A1B; }
-.step-inactive { background: #2D2D2D; color: #666; }
+.gold-glow { box-shadow: 0 4px 20px rgba(212, 160, 23, 0.4); }
+.blue-glow { box-shadow: 0 4px 20px rgba(93, 173, 226, 0.4); }
+.step-active { background: #D4A017; color: #FFFFFF; }
+.step-inactive { background: #E2E8F0; color: #718096; }
+.view { display: none; }
+.view.active { display: block; }
+.logo-img { mix-blend-mode: multiply; filter: contrast(1.1); height: 48px; width: auto; }
+
+/* LIVELY BLENDED BACKGROUND WITH YOUR FLEET */
+.hero-bg-container { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.hero-bg-slide {
+  position: absolute; inset: 0; background-size: cover; background-position: center;
+  opacity: 0; animation: kenBurns 18s infinite;
+}
+.hero-bg-slide:nth-child(1) { background-image: url('van.jpg'); animation-delay: 0s; }
+.hero-bg-slide:nth-child(2) { background-image: url('bakkies.jpg'); animation-delay: 6s; }
+.hero-bg-slide:nth-child(3) { background-image: url('building.jpg'); animation-delay: 12s; }
+
+@keyframes kenBurns {
+  0% { opacity: 0; transform: scale(1); }
+  5% { opacity: 0.6; }
+  33% { opacity: 0.6; transform: scale(1.1); }
+  38% { opacity: 0; }
+  100% { opacity: 0; }
+}
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(26,26,27,0.75) 0%, rgba(93,173,226,0.55) 100%);
+  z-index: 1;
+}
+@media (max-width: 640px) {.logo-img { height: 36px; }.hero-bg-slide { opacity: 0.4!important; } }
 </style>
 </head>
-<body class="bg-epic-charcoal text-white">
+<body class="antialiased">
 
-<!-- FIREBASE CONFIG - REPLACE WITH YOURS -->
+<!-- CONFIG - REPLACE YOUR 4 KEYS -->
 <script>
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "epic-couriers.firebaseapp.com",
-  databaseURL: "https://epic-couriers-default-rtdb.firebaseio.com",
-  projectId: "epic-couriers",
-  storageBucket: "epic-couriers.appspot.com"
+const CONFIG = {
+  FIREBASE: {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "epic-couriers.firebaseapp.com",
+    databaseURL: "https://epic-couriers-default-rtdb.firebaseio.com",
+    projectId: "epic-couriers",
+    storageBucket: "epic-couriers.appspot.com"
+  },
+  PAYFAST: { merchant_id: "10000100", merchant_key: "46f0cd694581a" },
+  TWILIO: { sid: "YOUR_TWILIO_SID", token: "YOUR_TWILIO_TOKEN", phone: "+27YOUR_NUMBER" },
+  WHATSAPP: { PHONE_ID: "YOUR_PHONE_ID", TOKEN: "YOUR_WHATSAPP_TOKEN" },
+  BUSINESS: { email: "info@epiccouriers.co.za", phone: "+27691711112", whatsapp: "27691711112" },
+  ADMIN_PASS: "epic2026"
 };
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(CONFIG.FIREBASE);
 const db = firebase.database();
 const storage = firebase.storage();
+let currentJobId = null, map, driverMarker, signaturePad, driverId = null;
 </script>
 
 <!-- TRACKING BAR -->
-<div class="bg-gradient-to-r from-epic-blue to-epic-gold p-2">
+<div class="bg-gradient-to-r from-epic-blue to-epic-gold p-2 relative z-20">
     <div class="max-w-7xl mx-auto px-4">
         <form id="tracking-form" class="flex flex-col sm:flex-row gap-2 items-center justify-center">
-            <div class="flex items-center gap-2 text-epic-charcoal font-bold">
+            <div class="flex items-center gap-2 text-white font-bold">
                 <i class="fas fa-search"></i><span class="text-sm">TRACK:</span>
             </div>
-            <input type="text" id="tracking-input" placeholder="EC123456" class="flex-1 max-w-md px-4 py-2 rounded-lg text-epic-charcoal font-semibold">
-            <button type="submit" class="bg-epic-charcoal text-white px-6 py-2 rounded-lg font-bold">Track Now</button>
+            <input type="text" id="tracking-input" placeholder="EC123456" class="flex-1 max-w-md px-4 py-2 rounded-lg text-epic-charcoal font-semibold border-0">
+            <button type="submit" class="bg-white text-epic-charcoal px-6 py-2 rounded-lg font-bold">Track Now</button>
         </form>
     </div>
 </div>
 
-<!-- HEADER -->
-<header class="sticky top-0 z-50 bg-epic-charcoal/95 backdrop-blur-sm border-b border-epic-blue/20">
+<!-- HEADER WITH YOUR LOGO -->
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20">
             <div class="flex items-center gap-3">
-                <img src="logo.png" alt="Epic Couriers" class="h-12 w-auto">
+                <img src="logo.png" alt="Epic Couriers" class="logo-img">
                 <div class="hidden sm:block">
-                    <div class="font-black text-xl">EPIC COURIERS</div>
+                    <div class="font-black text-xl text-epic-charcoal">EPIC COURIERS</div>
                     <div class="text-xs text-epic-gold font-bold">FAST. RELIABLE. PROFESSIONAL.</div>
                 </div>
-            <div class="hidden lg:flex items-center space-x-6">
-                <a href="#home" class="hover:text-epic-gold font-semibold">Home</a>
-                <a href="#quote" class="hover:text-epic-gold font-semibold">Quote</a>
-                <a href="#tracking" class="hover:text-epic-gold font-semibold">Tracking</a>
-                <a href="admin/" class="hover:text-epic-gold font-semibold">Admin</a>
-                <a href="driver/" class="hover:text-epic-gold font-semibold">Driver</a>
             </div>
-            <a href="https://wa.me/27691711112?text=Hi%20Epic%20Couriers,%20I%20need%20a%20quote" target="_blank" class="flex items-center gap-2 bg-epic-gold text-epic-charcoal px-5 py-2.5 rounded-lg font-black gold-glow">
-                <i class="fab fa-whatsapp"></i><span class="hidden sm:inline">Get Quote</span>
+            <div class="hidden lg:flex items-center space-x-6">
+                <a href="#" onclick="showView('client')" class="text-gray-700 hover:text-epic-blue font-semibold">Home</a>
+                <a href="#about" class="text-gray-700 hover:text-epic-blue font-semibold">About</a>
+                <a href="#quote" class="text-gray-700 hover:text-epic-blue font-semibold">Quote</a>
+                <a href="#" onclick="showView('admin')" class="text-gray-700 hover:text-epic-blue font-semibold">Admin</a>
+                <a href="#" onclick="showView('driver')" class="text-gray-700 hover:text-epic-blue font-semibold">Driver</a>
+            </div>
+            <a href="https://wa.me/27691711112?text=Hi%20Epic%20Couriers" target="_blank" class="flex items-center gap-2 bg-epic-gold text-white px-5 py-2.5 rounded-lg font-black gold-glow">
+                <i class="fab fa-whatsapp"></i><span class="hidden sm:inline">WhatsApp</span>
             </a>
         </div>
     </nav>
 </header>
 
-<!-- HERO + QUOTE CALCULATOR -->
-<section id="home" class="hero-pattern pt-20 pb-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-                <div class="inline-flex items-center gap-2 bg-epic-blue/10 border border-epic-blue/30 text-epic-blue px-4 py-2 rounded-full text-sm font-bold mb-6">
-                    <i class="fas fa-bolt"></i> SAME-DAY EAST JHB
+<!-- CLIENT VIEW -->
+<div id="client-view" class="view active">
+    <!-- HERO WITH BLENDED FLEET BACKGROUND -->
+    <section class="relative pt-16 pb-16 overflow-hidden min-h-">
+        <div class="hero-bg-container">
+            <div class="hero-bg-slide"></div>
+            <div class="hero-bg-slide"></div>
+            <div class="hero-bg-slide"></div>
+        </div>
+        <div class="hero-overlay"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm border border-white/30 text-white px-4 py-2 rounded-full text-sm font-bold mb-6">
+                        <i class="fas fa-bolt"></i> SAME-DAY EAST JHB
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-6 drop-shadow-lg">
+                        <span class="text-epic-gold">Epic Speed</span><br>Delivery
+                    </h1>
+                    <p class="text-lg text-gray-200 mb-8 drop-shadow">Boksburg, Germiston, Benoni, Kempton Park, Brakpan, Springs, Alberton, Vosloorus. Live GPS tracking + Photo proof on every job.</p>
+                    <div class="flex gap-4">
+                        <a href="#quote" class="bg-epic-gold text-white px-8 py-4 rounded-lg font-black gold-glow">Get Instant Quote</a>
+                        <a href="tel:+27691711112" class="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-8 py-4 rounded-lg font-black">Call 069 171 1112</a>
+                    </div>
                 </div>
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight mb-6">
-                    <span class="text-gradient">Epic Speed</span><br>Delivery
-                </h1>
-                <p class="text-lg text-gray-300 mb-8">Boksburg, Germiston, Benoni, Kempton Park, Brakpan, Springs, Alberton, Vosloorus, Dawn Park, Katlehong, Spruitview, Windmill Park, Elspark, Sunward Park. Photo proof on every job.</p>
-                <div class="flex gap-4">
-                    <a href="#quote" class="bg-epic-gold text-epic-charcoal px-8 py-4 rounded-lg font-black gold-glow">Get Instant Quote</a>
-                    <a href="tel:+27691711112" class="bg-epic-blue text-white px-8 py-4 rounded-lg font-black blue-glow">Call 069 171 1112</a>
+                <div id="quote" class="bg-white/95 backdrop-blur-sm border border-gray-200 rounded-2xl p-8 shadow-2xl">
+                    <h3 class="text-2xl font-black text-epic-charcoal mb-6 text-center"><i class="fas fa-calculator text-epic-gold"></i> Instant Quote</h3>
+                    <form id="quote-form" class="space-y-4">
+                        <div class="grid grid-cols-2 gap-4">
+                            <select id="from-loc" class="w-full px-4 py-3 rounded-lg bg-white border border-gray-300 text-epic-charcoal font-semibold">
+                                <option>Boksburg</option><option>Germiston</option><option>Benoni</option><option>Kempton Park</option>
+                                <option>Brakpan</option><option>Springs</option><option>Alberton</option><option>Vosloorus</option>
+                                <option>Dawn Park</option><option>Katlehong</option><option>Spruitview</option><option>Windmill Park</option>
+                                <option>Elspark</option><option>Sunward Park</option><option>Sandton</option><option>JHB CBD</option>
+                            </select>
+                            <select id="to-loc" class="w-full px-4 py-3 rounded-lg bg-white border border-gray-300 text-epic-charcoal font-semibold">
+                                <option>Sandton</option><option>JHB CBD</option><option>Boksburg</option><option>Germiston</option>
+                                <option>Benoni</option><option>Kempton Park</option><option>Brakpan</option><option>Springs</option>
+                                <option>Alberton</option><option>Vosloorus</option><option>Dawn Park</option><option>Katlehong</option>
+                            </select>
+                        </div>
+                        <div class="grid grid-cols-3 gap-4">
+                            <input type="number" id="weight" placeholder="Weight kg" value="1" class="px-4 py-3 rounded-lg bg-white border border-gray-300 text-epic-charcoal">
+                            <input type="number" id="length" placeholder="L cm" value="30" class="px-4 py-3 rounded-lg bg-white border border-gray-300 text-epic-charcoal">
+                            <input type="number" id="width" placeholder="W cm" value="20" class="px-4 py-3 rounded-lg bg-white border border-gray-300 text-epic-charcoal">
+                        </div>
+                        <button type="submit" class="w-full bg-epic-gold text-white px-8 py-4 rounded-lg font-black text-lg gold-glow">CALCULATE PRICE</button>
+                    </form>
+                    <div id="quote-result" class="hidden mt-6 p-6 bg-epic-blue/5 border border-epic-blue/20 rounded-xl text-center">
+                        <div class="text-sm text-epic-blue font-bold mb-2">ESTIMATED PRICE</div>
+                        <div id="quote-price" class="text-5xl font-black text-epic-gold mb-4">R0</div>
+                        <div id="quote-details" class="text-sm text-gray-600 mb-4"></div>
+                        <button onclick="openBooking()" class="w-full bg-[#25D366] text-white px-6 py-3 rounded-lg font-bold"><i class="fab fa-whatsapp"></i> BOOK NOW</button>
+                    </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- QUOTE CALCULATOR -->
-            <div id="quote" class="bg-gray-900/50 backdrop-blur-sm border border-epic-blue/30 rounded-2xl p-8 blue-glow">
-                <h3 class="text-2xl font-black mb-6 text-center"><i class="fas fa-calculator text-epic-gold"></i> Instant Quote</h3>
-                <form id="quote-form" class="space-y-4">
-                    <div class="grid grid-cols-2 gap-4">
-                        <select id="from-loc" class="w-full px-4 py-3 rounded-lg bg-epic-charcoal border border-epic-blue/30 font-semibold">
-                            <option>Boksburg</option><option>Germiston</option><option>Benoni</option><option>Kempton Park</option>
-                            <option>Brakpan</option><option>Springs</option><option>Alberton</option><option>Vosloorus</option>
-                            <option>Dawn Park</option><option>Katlehong</option><option>Spruitview</option><option>Windmill Park</option>
-                            <option>Elspark</option><option>Sunward Park</option><option>Sandton</option><option>JHB CBD</option>
-                        </select>
-                        <select id="to-loc" class="w-full px-4 py-3 rounded-lg bg-epic-charcoal border border-epic-blue/30 font-semibold">
-                            <option>Sandton</option><option>JHB CBD</option><option>Boksburg</option><option>Germiston</option>
-                            <option>Benoni</option><option>Kempton Park</option><option>Brakpan</option><option>Springs</option>
-                            <option>Alberton</option><option>Vosloorus</option><option>Dawn Park</option><option>Katlehong</option>
-                        </select>
+    <!-- ABOUT SECTION - NEW -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-black text-center text-epic-charcoal mb-4">About <span class="text-epic-blue">Epic Couriers</span></h2>
+            <p class="text-xl text-center text-gray-600 mb-16 max-w-3xl mx-auto">
+                Founded in Boksburg 2025, we’re East Rand’s fastest same-day courier. BBBEE Level 1. 
+                We move your business with live GPS, photo proof, and WhatsApp updates.
+            </p>
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="text-center">
+                    <div class="bg-epic-blue/10 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-truck text-3xl text-epic-blue"></i>
                     </div>
-                    <div class="grid grid-cols-3 gap-4">
-                        <input type="number" id="weight" placeholder="Weight kg" value="1" class="px-4 py-3 rounded-lg bg-epic-charcoal border border-epic-blue/30">
-                        <input type="number" id="length" placeholder="L cm" value="30" class="px-4 py-3 rounded-lg bg-epic-charcoal border border-epic-blue/30">
-                        <input type="number" id="width" placeholder="W cm" value="20" class="px-4 py-3 rounded-lg bg-epic-charcoal border border-epic-blue/30">
+                    <h3 class="font-black text-xl mb-2 text-epic-charcoal">Same-Day Fleet</h3>
+                    <p class="text-gray-600">Mercedes vans + Ford bakkies covering all 14 East Rand towns. 12PM cut-off for same-day.</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-epic-gold/10 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-map-marked-alt text-3xl text-epic-gold"></i>
                     </div>
-                    <button type="submit" class="w-full bg-epic-gold text-epic-charcoal px-8 py-4 rounded-lg font-black text-lg gold-glow">
-                        CALCULATE PRICE
-                    </button>
-                </form>
-                <div id="quote-result" class="hidden mt-6 p-6 bg-epic-blue/10 border border-epic-blue/30 rounded-xl text-center">
-                    <div class="text-sm text-epic-blue font-bold mb-2">ESTIMATED PRICE</div>
-                    <div id="quote-price" class="text-5xl font-black text-epic-gold mb-4">R0</div>
-                    <div id="quote-details" class="text-sm text-gray-400 mb-4"></div>
-                    <button onclick="startBooking()" class="w-full bg-[#25D366] text-white px-6 py-3 rounded-lg font-bold">
-                        <i class="fab fa-whatsapp"></i> BOOK VIA WHATSAPP
-                    </button>
+                    <h3 class="font-black text-xl mb-2 text-epic-charcoal">Live Tracking</h3>
+                    <p class="text-gray-600">Watch your driver on Google Maps. ETA updates + WhatsApp alerts automatically.</p>
+                </div>
+                <div class="text-center">
+                    <div class="bg-epic-blue/10 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-camera text-3xl text-epic-blue"></i>
+                    </div>
+                    <h3 class="font-black text-xl mb-2 text-epic-charcoal">Photo POD</h3>
+                    <p class="text-gray-600">Signature + photo proof on every delivery. SARS VAT invoices auto-emailed.</p>
+                </div>
+            </div>
+            <div class="bg-epic-light rounded-2xl p-8 text-center">
+                <h3 class="text-2xl font-black text-epic-charcoal mb-4">We Serve These Areas</h3>
+                <p class="text-gray-600">Boksburg • Germiston • Benoni • Kempton Park • Brakpan • Springs • Alberton • Vosloorus • Dawn Park • Katlehong • Spruitview • Windmill Park • Elspark • Sunward Park</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="tracking-section" class="py-16 bg-epic-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-black text-center text-epic-charcoal mb-8">Live Tracking</h2>
+            <div id="map" class="w-full h-96 rounded-2xl border-2 border-gray-200 shadow-lg"></div>
+            <div id="tracking-info" class="hidden mt-6 bg-white border border-epic-gold/30 rounded-xl p-6 shadow-lg">
+                <div class="grid md:grid-cols-3 gap-6 text-center">
+                    <div><div class="text-sm text-epic-blue font-bold">DRIVER</div><div id="driver-name" class="text-xl font-black text-epic-charcoal">-</div></div>
+                    <div><div class="text-sm text-epic-blue font-bold">ETA</div><div id="driver-eta" class="text-xl font-black text-epic-gold">-</div></div>
+                    <div><div class="text-sm text-epic-blue font-bold">STATUS</div><div id="driver-status" class="text-xl font-black text-epic-charcoal">-</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ADMIN VIEW -->
+<div id="admin-view" class="view">
+    <div class="min-h-screen bg-epic-light p-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="bg-white rounded-2xl shadow-xl p-6 mb-6">
+                <div class="flex justify-between items-center">
+                    <div class="flex items-center gap-3">
+                        <img src="logo.png" alt="Epic Couriers" class="logo-img h-8 w-auto">
+                        <h1 class="text-3xl font-black text-epic-charcoal">Admin Dashboard</h1>
+                    </div>
+                    <button onclick="showView('client')" class="bg-gray-200 px-4 py-2 rounded-lg font-bold">Back to Site</button>
+                </div>
+            </div>
+            <div class="grid lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 bg-white rounded-2xl shadow-xl p-6">
+                    <h3 class="font-black text-xl mb-4 text-epic-charcoal">Live Driver Map</h3>
+                    <div id="admin-map" class="w-full h-96 rounded-lg"></div>
+                </div>
+                <div class="space-y-6">
+                    <div class="bg-white rounded-2xl shadow-xl p-6">
+                        <h3 class="font-black text-xl mb-4 text-epic-charcoal">Today</h3>
+                        <div class="text-3xl font-black text-epic-gold" id="revenue-today">R0</div>
+                        <div class="text-sm text-gray-600"><span id="jobs-today">0</span> jobs</div>
+                    </div>
+                    <div class="bg-white rounded-2xl shadow-xl p-6">
+                        <h3 class="font-black text-xl mb-4 text-epic-charcoal">New Jobs</h3>
+                        <div id="admin-jobs" class="space-y-3"></div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
 
-<!-- 4-STEP BOOKING MODAL -->
-<div id="booking-modal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
-    <div class="bg-epic-charcoal border border-epic-blue/30 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+<!-- DRIVER VIEW -->
+<div id="driver-view" class="view">
+    <div class="min-h-screen bg-epic-light p-4">
+        <div class="max-w-md mx-auto">
+            <div class="bg-white rounded-2xl shadow-xl p-6">
+                <img src="logo.png" alt="Epic Couriers" class="logo-img h-16 mx-auto mb-4">
+                <h1 class="text-2xl font-black text-epic-charcoal mb-6 text-center">Driver App</h1>
+                <div id="driver-login">
+                    <input type="tel" id="driver-phone" placeholder="Phone Number" class="w-full px-4 py-3 rounded-lg border border-gray-300 mb-4">
+                    <button onclick="driverLogin()" class="w-full bg-epic-gold text-white py-3 rounded-lg font-black">LOGIN</button>
+                </div>
+                <div id="driver-dashboard" class="hidden">
+                    <button onclick="toggleOnline()" id="online-btn" class="w-full bg-epic-blue text-white py-4 rounded-lg font-black mb-4">GO ONLINE</button>
+                    <div id="driver-jobs" class="space-y-3"></div>
+                    <div id="signature-section" class="hidden mt-6">
+                        <h4 class="font-bold mb-2">Customer Signature</h4>
+                        <canvas id="signature-pad" class="border-2 border-gray-300 rounded-lg w-full" height="150"></canvas>
+                        <button onclick="completeDelivery()" class="w-full bg-epic-gold text-white py-3 rounded-lg font-black mt-3">COMPLETE DELIVERY</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- BOOKING MODAL -->
+<div id="booking-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full max-h- overflow-y-auto shadow-2xl">
         <div class="p-8">
             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-black">Complete Booking</h3>
-                <button onclick="closeBooking()" class="text-gray-400 hover:text-white"><i class="fas fa-times text-2xl"></i></button>
+                <h3 class="text-2xl font-black text-epic-charcoal">Complete Booking</h3>
+                <button onclick="closeBooking()" class="text-gray-400"><i class="fas fa-times text-2xl"></i></button>
             </div>
-
-            <!-- Step Indicator -->
             <div class="flex justify-between mb-8">
-                <div id="step1-ind" class="flex-1 text-center step-active py-2 rounded-l-lg font-bold">1. Contact</div>
-                <div id="step2-ind" class="flex-1 text-center step-inactive py-2 font-bold">2. Pickup</div>
-                <div id="step3-ind" class="flex-1 text-center step-inactive py-2 font-bold">3. Delivery</div>
-                <div id="step4-ind" class="flex-1 text-center step-inactive py-2 rounded-r-lg font-bold">4. Confirm</div>
+                <div id="s1" class="flex-1 text-center step-active py-2 rounded-l-lg font-bold text-sm">1. Contact</div>
+                <div id="s2" class="flex-1 text-center step-inactive py-2 font-bold text-sm">2. Pickup</div>
+                <div id="s3" class="flex-1 text-center step-inactive py-2 font-bold text-sm">3. Delivery</div>
+                <div id="s4" class="flex-1 text-center step-inactive py-2 rounded-r-lg font-bold text-sm">4. Pay</div>
             </div>
-
             <form id="booking-form">
-                <!-- Step 1: Contact -->
                 <div id="step1" class="space-y-4">
-                    <input type="text" id="bk-name" placeholder="Full Name *" required class="w-full px-4 py-3 rounded-lg bg-gray-900 border border-epic-blue/30">
-                    <input type="tel" id="bk-phone" placeholder="Phone Number *" required class="w-full px-4 py-3 rounded-lg bg-gray-900 border border-epic-blue/30">
-                    <input type="email" id="bk-email" placeholder="Email *" required class="w-full px-4 py-3 rounded-lg bg-gray-900 border border-epic-blue/30">
-                    <button type="button" onclick="nextStep(2)" class="w-full bg-epic-gold text-epic-charcoal py-3 rounded-lg font-black">NEXT</button>
+                    <input type="text" id="bk-name" placeholder="Full Name *" required class="w-full px-4 py-3 rounded-lg border border-gray-300">
+                    <input type="tel" id="bk-phone" placeholder="Phone *" required class="w-full px-4 py-3 rounded-lg border border-gray-300">
+                    <input type="email" id="bk-email" placeholder="Email *" required class="w-full px-4 py-3 rounded-lg border border-gray-300">
+                    <button type="button" onclick="nextStep(2)" class="w-full bg-epic-gold text-white py-3 rounded-lg font-black">NEXT</button>
                 </div>
-
-                <!-- Step 2: Pickup -->
                 <div id="step2" class="hidden space-y-4">
-                    <input type="text" id="bk-pickup-addr" placeholder="Pickup Address *" required class="w-full px-4 py-3 rounded-lg bg-gray-900 border border-epic-blue/30">
-                    <input type="text" id="bk-pickup-notes" placeholder="Pickup Notes (Gate code, etc)" class="w-full px-4 py-3 rounded-lg bg-gray-900 border border-epic-blue/30">
+                    <input type="text" id="bk-pickup" placeholder="Pickup Address *" required class="w-full px-4 py-3 rounded-lg border border-gray-300">
                     <div class="flex gap-4">
-                        <button type="button" onclick="nextStep(1)" class="flex-1 bg-gray-700 py-3 rounded-lg font-bold">BACK</button>
-                        <button type="button" onclick="nextStep(3)" class="flex-1 bg-epic-gold text-epic-charcoal py-3 rounded-lg font-black">NEXT</button>
+                        <button type="button" onclick="nextStep(1)" class="flex-1 bg-gray-200 py-3 rounded-lg font-bold">BACK</button>
+                        <button type="button" onclick="nextStep(3)" class="flex-1 bg-epic-gold text-white py-3 rounded-lg font-black">NEXT</button>
                     </div>
                 </div>
-
-                <!-- Step 3: Delivery -->
                 <div id="step3" class="hidden space-y-4">
-                    <input type="text" id="bk-delivery-addr" placeholder="Delivery Address *" required class="w-full px-4 py-3 rounded-lg bg-gray-900 border border-epic-blue/30">
-                    <input type="text" id="bk-delivery-name" placeholder="Recipient Name *" required class="w-full px-4 py-3 rounded-lg bg-gray-900 border border-epic-blue/30">
-                    <input type="tel" id="bk-delivery-phone" placeholder="Recipient Phone *" required class="w-full px-4 py-3 rounded-lg bg-gray-900 border border-epic-blue/30">
+                    <input type="text" id="bk-delivery" placeholder="Delivery Address *" required class="w-full px-4 py-3 rounded-lg border border-gray-300">
+                    <input type="text" id="bk-recipient" placeholder="Recipient Name *" required class="w-full px-4 py-3 rounded-lg border border-gray-300">
                     <div class="flex gap-4">
-                        <button type="button" onclick="nextStep(2)" class="flex-1 bg-gray-700 py-3 rounded-lg font-bold">BACK</button>
-                        <button type="button" onclick="nextStep(4)" class="flex-1 bg-epic-gold text-epic-charcoal py-3 rounded-lg font-black">NEXT</button>
+                        <button type="button" onclick="nextStep(2)" class="flex-1 bg-gray-200 py-3 rounded-lg font-bold">BACK</button>
+                        <button type="button" onclick="nextStep(4)" class="flex-1 bg-epic-gold text-white py-3 rounded-lg font-black">NEXT</button>
                     </div>
                 </div>
-
-                <!-- Step 4: Confirm + Payment -->
                 <div id="step4" class="hidden space-y-4">
-                    <div class="bg-epic-blue/10 border-epic-blue/30 rounded-lg p-6">
-                        <div class="text-sm text-epic-blue font-bold mb-2">TOTAL AMOUNT</div>
-                        <div id="final-price" class="text-4xl font-black text-epic-gold mb-4">R0</div>
-                        <div id="final-summary" class="text-sm text-gray-400"></div>
+                    <div class="bg-epic-blue/5 border border-epic-blue/20 rounded-lg p-6 text-center">
+                        <div class="text-sm text-epic-blue font-bold mb-2">TOTAL</div>
+                        <div id="final-price" class="text-4xl font-black text-epic-gold mb-2">R0</div>
                     </div>
-                    <button type="button" onclick="payWithPayFast()" class="w-full bg-epic-gold text-epic-charcoal py-4 rounded-lg font-black text-lg gold-glow">
-                        <i class="fas fa-credit-card"></i> PAY NOW VIA PAYFAST
-                    </button>
-                    <button type="button" onclick="payOnDelivery()" class="w-full bg-epic-blue text-white py-3 rounded-lg font-bold blue-glow">
-                        PAY ON DELIVERY
-                    </button>
-                    <button type="button" onclick="nextStep(3)" class="w-full bg-gray-700 py-3 rounded-lg font-bold">BACK</button>
+                    <button type="button" onclick="payNow()" class="w-full bg-epic-gold text-white py-4 rounded-lg font-black text-lg gold-glow">PAY NOW VIA PAYFAST</button>
+                    <button type="button" onclick="payCOD()" class="w-full bg-epic-blue text-white py-3 rounded-lg font-bold blue-glow">PAY ON DELIVERY</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-<!-- LIVE TRACKING SECTION -->
-<section id="tracking" class="py-20 bg-gray-900">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-black text-center mb-8">Live Driver Tracking</h2>
-        <div id="map" class="w-full h-96 rounded-2xl border-2 border-epic-blue/30"></div>
-        <div id="tracking-info" class="hidden mt-6 bg-epic-charcoal border-epic-gold/30 rounded-xl p-6">
-            <div class="grid md:grid-cols-3 gap-6 text-center">
-                <div>
-                    <div class="text-sm text-epic-blue font-bold">DRIVER</div>
-                    <div id="driver-name" class="text-xl font-black">-</div>
-                </div>
-                <div>
-                    <div class="text-sm text-epic-blue font-bold">ETA</div>
-                    <div id="driver-eta" class="text-xl font-black text-epic-gold">-</div>
-                </div>
-                <div>
-                    <div class="text-sm text-epic-blue font-bold">STATUS</div>
-                    <div id="driver-status" class="text-xl font-black">-</div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- FOOTER -->
-<footer class="bg-black border-t border-epic-blue/20 py-12">
+<footer class="bg-white border-t border-gray-200 py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid md:grid-cols-4 gap-8 mb-8">
             <div class="md:col-span-2">
-                <img src="logo.png" alt="Epic Couriers" class="h-12 mb-4">
-                <p class="text-gray-400 text-sm mb-4">Boksburg, East Rand, Gauteng, South Africa</p>
-                <p class="text-gray-400 text-sm">Reg: 2025/424904/07 | BBBEE Level 1</p>
+                <img src="logo.png" alt="Epic Couriers" class="logo-img h-12 mb-4">
+                <p class="text-gray-600 text-sm mb-2">Boksburg, East Rand, Gauteng, South Africa</p>
+                <p class="text-gray-600 text-sm">Reg: 2025/424904/07 | BBBEE Level 1</p>
             </div>
             <div>
-                <h4 class="font-black text-white mb-4">Contact</h4>
-                <ul class="space-y-2 text-sm text-gray-400">
+                <h4 class="font-black text-epic-charcoal mb-4">Contact</h4>
+                <ul class="space-y-2 text-sm text-gray-600">
                     <li><i class="fas fa-phone text-epic-blue"></i> +27 69 171 1112</li>
                     <li><i class="fas fa-envelope text-epic-blue"></i> info@epiccouriers.co.za</li>
-                    <li><i class="fas fa-globe text-epic-blue"></i> www.epiccouriers.co.za</li>
                 </ul>
             </div>
             <div>
-                <h4 class="font-black text-white mb-4">Hours</h4>
-                <ul class="space-y-2 text-sm text-gray-400">
+                <h4 class="font-black text-epic-charcoal mb-4">Hours</h4>
+                <ul class="space-y-2 text-sm text-gray-600">
                     <li>Mon-Fri: 07:00-17:00</li>
                     <li>Sat: 08:00-13:00</li>
-                    <li>Sun: Closed</li>
                 </ul>
             </div>
-        <div class="border-t border-epic-blue/20 pt-8 text-center text-sm text-gray-500">
-            &copy; 2026 Epic Couriers. All rights reserved.
+        </div>
+        <div class="border-t border-gray-200 pt-8 text-center text-sm text-gray-500">
+            &copy; 2026 Epic Couriers. All rights reserved. | <a href="#" onclick="showView('admin')" class="text-epic-blue">Admin</a> | <a href="#" onclick="showView('driver')" class="text-epic-blue">Driver</a>
         </div>
     </div>
 </footer>
 
-<!-- FLOATING WHATSAPP -->
-<a href="https://wa.me/27691711112?text=Hi%20Epic%20Couriers" target="_blank" class="fixed bottom-6 right-6 bg-[#25D366] text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl z-40">
-    <i class="fab fa-whatsapp text-2xl"></i>
-</a>
-
+<!-- MAIN JS - ALL SYSTEMS COMBINED -->
 <script>
-// === GLOBAL STATE ===
-let currentJobId = null;
-let map, driverMarker, directionsService, directionsRenderer;
+// === ROUTER ===
+function showView(view) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(view + '-view').classList.add('active');
+  window.location.hash = view;
+  if (view === 'admin') initAdmin();
+  if (view === 'driver') initDriver();
+}
+window.addEventListener('load', () => {
+  const hash = window.location.hash.replace('#', '').split('/')[0] || 'client';
+  if (hash === 'track') loadTracking(window.location.hash.split('/')[1]);
+  else showView(hash);
+});
 
-// === QUOTE CALCULATOR ===
-const distances = {
-  'Boksburg-Sandton': 35, 'Boksburg-JHB CBD': 28, 'Boksburg-Germiston': 12, 'Boksburg-Benoni': 8,
-  'Boksburg-Kempton Park': 15, 'Boksburg-Brakpan': 10, 'Boksburg-Springs': 18, 'Boksburg-Alberton': 20,
-  'Boksburg-Vosloorus': 15, 'Boksburg-Dawn Park': 5, 'Boksburg-Katlehong': 18, 'Germiston-Sandton': 25
-};
-
-document.getElementById('quote-form').addEventListener('submit', function(e) {
+// === QUOTE CALC ===
+const distances = {'Boksburg-Sandton':35,'Boksburg-JHB CBD':28,'Boksburg-Germiston':12,'Boksburg-Benoni':8,'Boksburg-Brakpan':10,'Boksburg-Springs':18,'Boksburg-Alberton':20,'Boksburg-Vosloorus':15};
+document.getElementById('quote-form').onsubmit = e => {
   e.preventDefault();
   const from = document.getElementById('from-loc').value;
   const to = document.getElementById('to-loc').value;
   const weight = parseFloat(document.getElementById('weight').value);
-  const key = `${from}-${to}`;
-  const km = distances[key] || distances[`${to}-${from}`] || 20;
+  const km = distances[`${from}-${to}`] || distances[`${to}-${from}`] || 20;
   const price = 60 + (km * 8) + (weight * 5);
-
   document.getElementById('quote-price').textContent = `R${price.toFixed(2)}`;
-  document.getElementById('quote-details').textContent = `${from} → ${to} | ${km}km | ${weight}kg`;
+  document.getElementById('quote-details').textContent = `${from} → ${to} | ${km}km`;
   document.getElementById('quote-result').classList.remove('hidden');
-
-  // Store for booking
   window.currentQuote = {from, to, weight, km, price};
-});
+};
 
-function startBooking() {
+// === BOOKING ===
+function openBooking() {
   document.getElementById('booking-modal').classList.remove('hidden');
   document.getElementById('final-price').textContent = `R${window.currentQuote.price.toFixed(2)}`;
-  document.getElementById('final-summary').textContent = `${window.currentQuote.from} → ${window.currentQuote.to} | ${window.currentQuote.km}km`;
 }
-
-// === 4-STEP BOOKING ===
-function nextStep(step) {
-  for(let i=1; i<=4; i++) {
+function closeBooking() { document.getElementById('booking-modal').classList.add('hidden'); }
+function nextStep(n) {
+  for(let i=1;i<=4;i++) {
     document.getElementById(`step${i}`).classList.add('hidden');
-    document.getElementById(`step${i}-ind`).classList.remove('step-active');
-    document.getElementById(`step${i}-ind`).classList.add('step-inactive');
+    document.getElementById(`s${i}`).classList.remove('step-active');
+    document.getElementById(`s${i}`).classList.add('step-inactive');
   }
-  document.getElementById(`step${step}`).classList.remove('hidden');
-  document.getElementById(`step${step}-ind`).classList.remove('step-inactive');
-  document.getElementById(`step${step}-ind`).classList.add('step-active');
+  document.getElementById(`step${n}`).classList.remove('hidden');
+  document.getElementById(`s${n}`).classList.add('step-active');
 }
-
-function closeBooking() {
-  document.getElementById('booking-modal').classList.add('hidden');
-}
-
-// === PAYFAST INTEGRATION ===
-function payWithPayFast() {
-  const form = document.createElement('form');
-  form.method = 'POST';
-  form.action = 'https://www.payfast.co.za/eng/process';
-  form.target = '_blank';
-
-  const fields = {
-    merchant_id: '10000100', // REPLACE WITH YOUR ID
-    merchant_key: '46f0cd694581a', // REPLACE WITH YOUR KEY
-    amount: window.currentQuote.price.toFixed(2),
-    item_name: `Epic Courier: ${window.currentQuote.from} to ${window.currentQuote.to}`,
-    return_url: window.location.href + '?payment=success',
-    cancel_url: window.location.href + '?payment=cancelled'
-  };
-
-  Object.keys(fields).forEach(key => {
-    const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = key;
-    input.value = fields[key];
-    form.appendChild(input);
-  });
-
-  document.body.appendChild(form);
-  form.submit();
-
-  // Save booking to Firebase
-  saveBookingToFirebase('paid');
-}
-
-function payOnDelivery() {
-  saveBookingToFirebase('cod');
-  alert('Booking confirmed! Pay driver on delivery. Tracking SMS sent.');
-  closeBooking();
-}
-
-// === FIREBASE BOOKING SAVE ===
-function saveBookingToFirebase(paymentStatus) {
+function payNow() {
   currentJobId = 'EC' + Date.now();
   const booking = {
     id: currentJobId,
-    customer: {
-      name: document.getElementById('bk-name').value,
-      phone: document.getElementById('bk-phone').value,
-      email: document.getElementById('bk-email').value
-    },
-    pickup: document.getElementById('bk-pickup-addr').value,
-    delivery: {
-      address: document.getElementById('bk-delivery-addr').value,
-      name: document.getElementById('bk-delivery-name').value,
-      phone: document.getElementById('bk-delivery-phone').value
-    },
+    customer: { name: document.getElementById('bk-name').value, phone: document.getElementById('bk-phone').value, email: document.getElementById('bk-email').value },
+    pickup: document.getElementById('bk-pickup').value,
+    delivery: { address: document.getElementById('bk-delivery').value, name: document.getElementById('bk-recipient').value },
     quote: window.currentQuote,
-    paymentStatus,
-    status: 'new',
+    status: 'paid',
     createdAt: firebase.database.ServerValue.TIMESTAMP
   };
-
   db.ref(`jobs/${currentJobId}`).set(booking);
-
-  // Email to business
-  window.location.href = `mailto:info@epiccouriers.co.za?subject=New Booking ${currentJobId}&body=${encodeURIComponent(JSON.stringify(booking, null, 2))}`;
+  sendWhatsApp('booking_confirmed', booking.customer.phone, booking);
+  const form = document.createElement('form');
+  form.method = 'POST'; form.action = 'https://www.payfast.co.za/eng/process';
+  form.innerHTML = `<input name="merchant_id" value="${CONFIG.PAYFAST.merchant_id}"><input name="merchant_key" value="${CONFIG.PAYFAST.merchant_key}"><input name="amount" value="${window.currentQuote.price.toFixed(2)}"><input name="item_name" value="Epic Courier ${currentJobId}">`;
+  document.body.appendChild(form); form.submit();
 }
-
-// === LIVE TRACKING ===
-document.getElementById('tracking-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const trackId = document.getElementById('tracking-input').value;
-  loadTracking(trackId);
-});
-
-function loadTracking(jobId) {
-  db.ref(`jobs/${jobId}`).once('value', snap => {
-    const job = snap.val();
-    if (!job) return alert('Tracking number not found');
-
-    document.getElementById('tracking-info').classList.remove('hidden');
-
-    // Init map
-    map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 12,
-      center: {lat: -26.214, lng: 28.25},
-      styles: [{ "elementType": "geometry", "stylers": [{"color": "#1A1B"}] }]
-    });
-
-    // Listen for driver location
-    if (job.driverId) {
-      db.ref(`drivers/${job.driverId}/location`).on('value', snap => {
-        const loc = snap.val();
-        if (!loc) return;
-
-        if (!driverMarker) {
-          driverMarker = new google.maps.Marker({
-            position: loc,
-            map,
-            icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-          });
-        } else {
-          driverMarker.setPosition(loc);
-        }
-
-        document.getElementById('driver-name').textContent = job.driverName || 'Driver';
-        document.getElementById('driver-status').textContent = job.status;
-      });
-    }
-  });
-}
-
-// === INITIALIZE ===
-window.addEventListener('load', () => {
-  // Check for payment return
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('payment') === 'success') {
-    alert('Payment successful! Driver will be assigned shortly. Track via SMS link.');
-  }
-});
-</script>
-
-</body>
-</html>
+function payCOD() {
+  currentJobId = 'EC' + Date.now();
+  const booking = { id: currentJobId, customer: { name: document.getElementById('bk-name').value, phone: document.getElementById('bk-phone').value
