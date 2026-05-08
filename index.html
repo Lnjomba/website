@@ -1,744 +1,473 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Epic Couriers - Same-Day Delivery Gauteng</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { 
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-      background: #0F172A;
-      color: #E2E8F0;
-      line-height: 1.5;
-    }
-    .container { max-width: 600px; margin: 0 auto; padding: 0 20px; }
-    
-    /* Header */
-    .header { 
-      background: #0F172A;
-      padding: 16px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #1E293B;
-    }
-    .header-logo { width: 140px; }
-    .menu-icon { width: 24px; height: 24px; color: white; }
-    
-    /* Hero */
-    .hero { padding: 40px 20px 30px; }
-    .tagline { 
-      color: #94A3B8; 
-      font-size: 0.75rem; 
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 24px;
-      display: block;
-    }
-    .hero h1 { 
-      font-size: 2.8rem; 
-      font-weight: 900; 
-      line-height: 1.1; 
-      color: white;
-      margin-bottom: 24px;
-    }
-    .hero h1 .orange { color: #F97316; }
-    .hero p { 
-      color: #CBD5E1; 
-      font-size: 1rem; 
-      margin-bottom: 32px;
-      line-height: 1.6;
-    }
-    .btn-primary { 
-      background: #F97316; 
-      color: white; 
-      padding: 16px 24px; 
-      border-radius: 12px; 
-      font-weight: 700;
-      text-decoration: none; 
-      display: block;
-      text-align: center;
-      margin-bottom: 12px;
-      font-size: 1rem;
-    }
-    .btn-secondary { 
-      background: #1E293B; 
-      color: white; 
-      padding: 16px 24px; 
-      border-radius: 12px; 
-      font-weight: 700;
-      text-decoration: none; 
-      display: block;
-      text-align: center;
-      margin-bottom: 40px;
-      font-size: 1rem;
-    }
-    
-    /* Stats Grid */
-    .stats { 
-      display: grid; 
-      grid-template-columns: 1fr 1fr; 
-      gap: 12px;
-      margin-bottom: 30px;
-    }
-    .stat { 
-      background: #1E293B; 
-      padding: 20px; 
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .stat-icon { 
-      width: 20px; 
-      height: 20px; 
-      color: #F97316;
-      flex-shrink: 0;
-    }
-    .stat-text h3 { color: white; font-size: 1.1rem; font-weight: 700; }
-    .stat-text p { color: #94A3B8; font-size: 0.8rem; }
-    
-    /* Orange Banner */
-    .banner { 
-      background: #F97316; 
-      padding: 20px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .banner-item { 
-      display: flex; 
-      align-items: center; 
-      gap: 10px;
-      color: white;
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
-    .banner-icon { width: 18px; height: 18px; }
-    
-    /* White Section */
-    .white-section { 
-      background: white; 
-      color: #0F172A;
-      padding: 50px 20px;
-    }
-    .section-label { 
-      color: #F97316; 
-      font-size: 0.75rem; 
-      font-weight: 700;
-      letter-spacing: 1px;
-      margin-bottom: 12px;
-    }
-    .section-title { 
-      font-size: 2rem; 
-      font-weight: 900; 
-      line-height: 1.2;
-      margin-bottom: 16px;
-      color: #0F172A;
-    }
-    .section-title .orange { color: #F97316; }
-    .section-desc { 
-      color: #475569; 
-      margin-bottom: 30px;
-      line-height: 1.6;
-    }
-    
-    /* Service Cards */
-    .service-card { 
-      background: #F8FAFC; 
-      border-radius: 16px; 
-      padding: 24px;
-      margin-bottom: 16px;
-      border: 1px solid #E2E8F0;
-    }
-    .service-tag { 
-      background: #FFF7ED; 
-      color: #F97316; 
-      font-size: 0.7rem; 
-      font-weight: 700;
-      padding: 4px 10px; 
-      border-radius: 6px;
-      display: inline-block;
-      margin-bottom: 12px;
-      letter-spacing: 0.5px;
-    }
-    .service-icon { 
-      width: 32px; 
-      height: 32px; 
-      background: #FFF7ED;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-      color: #F97316;
-    }
-    .service-card h3 { 
-      font-size: 1.3rem; 
-      margin-bottom: 8px;
-      color: #0F172A;
-    }
-    .service-card .subtitle { 
-      color: #64748B; 
-      font-size: 0.9rem;
-      margin-bottom: 16px;
-    }
-    .service-card p { 
-      color: #475569; 
-      font-size: 0.95rem;
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-    .service-locations { 
-      background: white;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      color: #64748B;
-      font-family: monospace;
-    }
-    
-    /* Stats Dark */
-    .stats-dark { 
-      display: grid; 
-      grid-template-columns: 1fr 1fr; 
-      gap: 12px;
-      margin: 40px 0;
-    }
-    .stat-dark { 
-      background: #1E293B; 
-      padding: 24px; 
-      border-radius: 12px;
-      text-align: center;
-    }
-    .stat-dark h3 { 
-      font-size: 2rem; 
-      color: #F97316; 
-      font-weight: 900;
-      margin-bottom: 4px;
-    }
-    .stat-dark p { 
-      color: #94A3B8; 
-      font-size: 0.8rem;
-    }
-    
-    /* Network Section */
-    .network { 
-      background: #0F172A; 
-      padding: 50px 20px;
-    }
-    .network h2 { 
-      font-size: 2rem; 
-      font-weight: 900; 
-      color: white;
-      margin-bottom: 12px;
-    }
-    .network h2 .orange { color: #F97316; }
-    .network p { color: #CBD5E1; margin-bottom: 30px; }
-    
-    .map-container { 
-      background: #1E293B; 
-      border-radius: 16px; 
-      padding: 30px 20px;
-      margin-bottom: 20px;
-      min-height: 280px;
-      position: relative;
-    }
-    .map-dots { 
-      position: relative;
-      width: 100%;
-      height: 220px;
-    }
-    .dot { 
-      position: absolute;
-      width: 8px;
-      height: 8px;
-      background: #F97316;
-      border-radius: 50%;
-    }
-    .dot-label { 
-      position: absolute;
-      font-size: 0.7rem;
-      color: #94A3B8;
-      margin-top: 12px;
-      margin-left: -20px;
-    }
-    .dot.active { 
-      width: 12px; 
-      height: 12px; 
-      background: #F97316;
-      box-shadow: 0 0 0 4px rgba(249,115,22,0.3);
-    }
-    .dot.active + .dot-label { 
-      color: #F97316; 
-      font-weight: 700;
-    }
-    
-    .area-info { 
-      background: #1E293B; 
-      border-radius: 16px; 
-      padding: 24px;
-      margin-bottom: 12px;
-    }
-    .zone-tag { 
-      background: rgba(249,115,22,0.2); 
-      color: #F97316; 
-      font-size: 0.7rem;
-      padding: 4px 10px;
-      border-radius: 6px;
-      display: inline-block;
-      margin-bottom: 12px;
-      font-weight: 700;
-    }
-    .area-info h3 { 
-      font-size: 1.5rem; 
-      color: white;
-      margin-bottom: 8px;
-    }
-    .area-info .time { 
-      color: #F97316; 
-      font-weight: 700;
-      margin-bottom: 12px;
-      display: inline-block;
-    }
-    .area-info p { color: #CBD5E1; font-size: 0.95rem; }
-    
-    .area-list { background: #1E293B; border-radius: 16px; }
-    .area-row { 
-      padding: 16px 20px;
-      border-bottom: 1px solid #334155;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .area-row:last-child { border-bottom: none; }
-    .area-name { color: white; font-weight: 600; }
-    .area-time { color: #94A3B8; font-size: 0.85rem; }
-    .area-zone { 
-      background: #334155; 
-      color: #CBD5E1; 
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 0.75rem;
-    }
-    
-    /* Process */
-    .process { background: white; padding: 50px 20px; }
-    .process-step { 
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    .step-number { 
-      width: 60px;
-      height: 60px;
-      background: #FFF7ED;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      color: #F97316;
-      font-weight: 900;
-      font-size: 1.3rem;
-    }
-    .process-step h3 { 
-      font-size: 1.2rem; 
-      color: #0F172A;
-      margin-bottom: 12px;
-    }
-    .process-step p { 
-      color: #64748B; 
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-    
-    /* Booking Form */
-    .booking { 
-      background: white; 
-      padding: 50px 20px;
-    }
-    .form-steps { 
-      display: flex;
-      justify-content: space-between;
-      margin: 30px 0;
-      position: relative;
-    }
-    .form-steps:before { 
-      content: '';
-      position: absolute;
-      top: 15px;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: #E2E8F0;
-      z-index: 0;
-    }
-    .form-step { 
-      text-align: center;
-      position: relative;
-      z-index: 1;
-    }
-    .form-step-num { 
-      width: 32px;
-      height: 32px;
-      background: #E2E8F0;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 8px;
-      color: #94A3B8;
-      font-weight: 700;
-      font-size: 0.9rem;
-    }
-    .form-step.active .form-step-num { 
-      background: #F97316; 
-      color: white;
-    }
-    .form-step label { 
-      font-size: 0.75rem; 
-      color: #64748B;
-    }
-    .form-group { margin-bottom: 20px; }
-    .form-group label { 
-      display: block;
-      color: #0F172A;
-      font-weight: 600;
-      margin-bottom: 8px;
-      font-size: 0.9rem;
-    }
-    .form-group input { 
-      width: 100%;
-      padding: 14px;
-      border: 1px solid #E2E8F0;
-      border-radius: 8px;
-      font-size: 1rem;
-      background: #F8FAFC;
-    }
-    .btn-next { 
-      background: #0F172A; 
-      color: white; 
-      padding: 16px 32px;
-      border-radius: 12px;
-      border: none;
-      font-weight: 700;
-      width: 100%;
-      font-size: 1rem;
-      margin-top: 10px;
-    }
-    
-    /* CTA */
-    .cta { 
-      background: #0F172A; 
-      padding: 60px 20px;
-      text-align: center;
-    }
-    .cta-label { 
-      color: #F97316; 
-      font-size: 0.75rem; 
-      font-weight: 700;
-      letter-spacing: 1px;
-      margin-bottom: 16px;
-    }
-    .cta h2 { 
-      font-size: 2.2rem; 
-      font-weight: 900; 
-      color: white;
-      line-height: 1.2;
-      margin-bottom: 30px;
-    }
-    .cta h2 .orange { color: #F97316; }
-    
-    /* Footer */
-    .footer { 
-      background: #0F172A; 
-      padding: 40px 20px 20px;
-      border-top: 1px solid #1E293B;
-    }
-    .footer-logo { width: 160px; margin-bottom: 20px; }
-    .footer-desc { 
-      color: #94A3B8; 
-      font-size: 0.9rem;
-      margin-bottom: 30px;
-      line-height: 1.6;
-    }
-    .footer-section { margin-bottom: 30px; }
-    .footer-title { 
-      color: #F97316; 
-      font-size: 0.75rem; 
-      font-weight: 700;
-      letter-spacing: 1px;
-      margin-bottom: 16px;
-    }
-    .footer-link { 
-      color: #CBD5E1; 
-      text-decoration: none;
-      display: block;
-      padding: 6px 0;
-      font-size: 0.9rem;
-    }
-    .contact-item { 
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: #CBD5E1;
-      padding: 8px 0;
-      font-size: 0.9rem;
-    }
-    .contact-icon { color: #F97316; width: 18px; }
-    .footer-bottom { 
-      border-top: 1px solid #1E293B; 
-      margin-top: 30px;
-      padding-top: 20px;
-      text-align: center;
-      color: #64748B;
-      font-size: 0.8rem;
-      line-height: 1.6;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Epic Couriers | Cyber-Speed Delivery East JHB</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        'epic-charcoal': '#1A1A1B',
+        'epic-blue': '#00D2FF',
+        'epic-lime': '#39FF14',
+      },
+      fontFamily: {
+        'inter': ['Inter', 'sans-serif'],
+      }
+    }
+  }
+}
+</script>
+<style>
+    body { font-family: 'Inter', sans-serif; background: #1A1A1B; }
+    .text-gradient {
+        background: linear-gradient(90deg, #00D2FF 0%, #39FF14 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+    .neon-glow { box-shadow: 0 0 20px rgba(57, 255, 20, 0.4); }
+    .blue-glow { box-shadow: 0 0 20px rgba(0, 210, 255, 0.3); }
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover { transform: translateY(-8px); }
+    .hero-pattern {
+        background-color: #1A1A1B;
+        background-image: radial-gradient(#00D2FF15 1px, transparent 1px);
+        background-size: 30px 30px;
+    }
+    @keyframes pulse-glow { 0%, 100% { box-shadow: 0 0 20px rgba(57, 255, 20, 0.4); } 50% { box-shadow: 0 0 30px rgba(57, 255, 20, 0.7); } }
+    .pulse-glow { animation: pulse-glow 2s infinite; }
+</style>
 </head>
-<body>
+<body class="bg-epic-charcoal text-white antialiased">
 
-  <div class="header">
-    <img src="logo.png" alt="Epic Couriers" class="header-logo">
-    <svg class="menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-    </svg>
-  </div>
-
-  <div class="hero container">
-    <span class="tagline">Fast. Reliable. Professional. · Same-Day Gauteng</span>
-    <h1>THE LAST<br>MILE,<br><span class="orange">FIRST CLASS.</span></h1>
-    <p>Epic Couriers is a Gauteng-based, tech-enabled courier service built for SMEs and online stores underserved by large couriers. Same-day delivery with a 12:00 PM cut-off, 98% on-time target.</p>
-    <a href="PASTE_YOUR_BASE44_LINK_HERE" class="btn-primary">Book a Delivery →</a>
-    <a href="#services" class="btn-secondary">Our Services</a>
-  </div>
-
-  <div class="container">
-    <div class="stats">
-      <div class="stat">
-        <svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-        <div class="stat-text">
-          <h3>12:00 PM</h3>
-          <p>Same-Day Cut-off</p>
-        </div>
-      </div>
-      <div class="stat">
-        <svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-        <div class="stat-text">
-          <h3>8 Areas</h3>
-          <p>Gauteng Coverage</p>
-        </div>
-      </div>
-      <div class="stat">
-        <svg class="stat-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-        <div class="stat-text">
-          <h3>98%</h3>
-          <p>On-Time Target</p>
-        </div>
-      </div>
+<!-- INSTANT TRACKING BAR - TOP OF PAGE -->
+<div class="bg-gradient-to-r from-epic-blue to-epic-lime p-2">
+    <div class="max-w-7xl mx-auto px-4">
+        <form id="tracking-form" class="flex flex-col sm:flex-row gap-2 items-center justify-center">
+            <div class="flex items-center gap-2 text-epic-charcoal font-bold">
+                <i class="fas fa-search"></i>
+                <span class="text-sm">TRACK YOUR PARCEL:</span>
+            </div>
+            <input type="text" id="tracking-input" placeholder="Enter tracking number (e.g. EC123456)" class="flex-1 max-w-md px-4 py-2 rounded-lg text-epic-charcoal font-semibold focus:ring-2 focus:ring-white outline-none">
+            <button type="submit" class="bg-epic-charcoal text-white px-6 py-2 rounded-lg font-bold hover:bg-gray-800 transition">
+                Track Now
+            </button>
+        </form>
     </div>
-  </div>
+</div>
 
-  <div class="banner">
-    <div class="banner-item">
-      <svg class="banner-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-      Proof of Delivery on Every Job
+<!-- Header -->
+<header class="sticky top-0 z-50 bg-epic-charcoal/95 backdrop-blur-sm border-b border-epic-blue/20">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+            <div class="flex items-center gap-3">
+                <img src="logo.png" alt="Epic Couriers" class="h-12 w-auto">
+                <div class="hidden sm:block">
+                    <div class="font-black text-xl text-white">EPIC COURIERS</div>
+                    <div class="text-xs text-epic-lime font-bold tracking-wider">CYBER-SPEED LOGISTICS</div>
+                </div>
+            </div>
+            
+            <div class="hidden lg:flex items-center space-x-8">
+                <a href="#home" class="text-gray-300 hover:text-epic-lime font-semibold transition">Home</a>
+                <a href="#services" class="text-gray-300 hover:text-epic-lime font-semibold transition">Services</a>
+                <a href="#tracking" class="text-gray-300 hover:text-epic-lime font-semibold transition">Tracking</a>
+                <a href="#business" class="text-gray-300 hover:text-epic-lime font-semibold transition">Business</a>
+                <a href="#contact" class="text-gray-300 hover:text-epic-lime font-semibold transition">Contact</a>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <button onclick="openDashboard()" class="hidden sm:flex items-center gap-2 bg-gray-800 text-white px-4 py-2 rounded-lg font-semibold hover:bg-gray-700 transition border border-epic-blue/30">
+                    <i class="fas fa-user"></i>
+                    Dashboard
+                </button>
+                <a href="https://wa.me/27691711112?text=Hi%20Epic%20Couriers,%20I%20need%20an%20instant%20quote" target="_blank" class="flex items-center gap-2 bg-epic-lime text-epic-charcoal px-5 py-2.5 rounded-lg font-black btn-primary neon-glow">
+                    <i class="fab fa-whatsapp text-lg"></i>
+                    <span class="hidden sm:inline">Get Quote</span>
+                </a>
+                <button id="mobile-menu-btn" class="lg:hidden text-white p-2">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden pb-4 border-t border-epic-blue/20">
+            <div class="flex flex-col space-y-4 pt-4">
+                <a href="#home" class="text-gray-300 hover:text-epic-lime font-semibold">Home</a>
+                <a href="#services" class="text-gray-300 hover:text-epic-lime font-semibold">Services</a>
+                <a href="#tracking" class="text-gray-300 hover:text-epic-lime font-semibold">Tracking</a>
+                <a href="#business" class="text-gray-300 hover:text-epic-lime font-semibold">Business</a>
+                <a href="#contact" class="text-gray-300 hover:text-epic-lime font-semibold">Contact</a>
+                <button onclick="openDashboard()" class="flex items-center justify-center gap-2 bg-gray-800 text-white px-5 py-2.5 rounded-lg font-semibold border border-epic-blue/30">
+                    <i class="fas fa-user"></i>
+                    Client Dashboard
+                </button>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Hero Section with Quote Calculator -->
+<section id="home" class="hero-pattern pt-20 pb-20 lg:pt-28 lg:pb-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="inline-flex items-center gap-2 bg-epic-blue/10 border-epic-blue/30 text-epic-blue px-4 py-2 rounded-full text-sm font-bold mb-6">
+                    <i class="fas fa-bolt"></i>
+                    FAST. RELIABLE. PROFESSIONAL.
+                </div>
+                <h1 class="text-4xl sm:text-5xl lg:text-7xl font-black text-white leading-tight mb-6">
+                    <span class="text-gradient">Cyber-Speed</span><br>Delivery East JHB
+                </h1>
+                <p class="text-lg sm:text-xl text-gray-300 mb-8 leading-relaxed">
+                    Epic Couriers offers fast, reliable same-day delivery across Boksburg, East Johannesburg, Germiston, Benoni, and surrounding areas. Photo proof on every job. No call centres — direct WhatsApp line.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 mb-10">
+                    <a href="#quote-calculator" class="bg-epic-lime text-epic-charcoal px-8 py-4 rounded-lg font-black text-center btn-primary inline-flex items-center justify-center gap-2 neon-glow">
+                        <i class="fas fa-calculator"></i>
+                        Get Instant Quote
+                    </a>
+                    <a href="tel:+27691711112" class="bg-epic-blue text-white px-8 py-4 rounded-lg font-black text-center btn-primary inline-flex items-center justify-center gap-2 blue-glow">
+                        <i class="fas fa-phone"></i>
+                        Call 069 171 1112
+                    </a>
+                </div>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="text-center">
+                        <div class="text-3xl font-black text-epic-lime mb-1">98%</div>
+                        <div class="text-xs text-gray-400 font-semibold">ON-TIME</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-black text-epic-blue mb-1">R60</div>
+                        <div class="text-xs text-gray-400 font-semibold">FROM</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-black text-epic-lime mb-1">0</div>
+                        <div class="text-xs text-gray-400 font-semibold">MINIMUMS</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- QUOTE CALCULATOR -->
+            <div id="quote-calculator" class="bg-gray-900/50 backdrop-blur-sm border border-epic-blue/30 rounded-2xl p-8 blue-glow">
+                <h3 class="text-2xl font-black text-white mb-6 text-center">
+                    <i class="fas fa-bolt text-epic-lime"></i> Instant Quote Calculator
+                </h3>
+                <form id="quote-form" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold text-epic-blue mb-2">FROM</label>
+                            <select id="from-location" class="w-full px-4 py-3 rounded-lg bg-epic-charcoal border border-epic-blue/30 text-white font-semibold focus:ring-2 focus:ring-epic-lime outline-none">
+                                <option>Boksburg</option>
+                                <option>Germiston</option>
+                                <option>Benoni</option>
+                                <option>Kempton Park</option>
+                                <option>Sandton</option>
+                                <option>JHB CBD</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-epic-blue mb-2">TO</label>
+                            <select id="to-location" class="w-full px-4 py-3 rounded-lg bg-epic-charcoal border border-epic-blue/30 text-white font-semibold focus:ring-2 focus:ring-epic-lime outline-none">
+                                <option>Sandton</option>
+                                <option>JHB CBD</option>
+                                <option>Boksburg</option>
+                                <option>Germiston</option>
+                                <option>Benoni</option>
+                                <option>Kempton Park</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-sm font-bold text-epic-blue mb-2">WEIGHT (kg)</label>
+                            <input type="number" id="weight" value="1" min="0.1" step="0.1" class="w-full px-4 py-3 rounded-lg bg-epic-charcoal border border-epic-blue/30 text-white font-semibold focus:ring-2 focus:ring-epic-lime outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-epic-blue mb-2">LENGTH (cm)</label>
+                            <input type="number" id="length" value="30" min="1" class="w-full px-4 py-3 rounded-lg bg-epic-charcoal border border-epic-blue/30 text-white font-semibold focus:ring-2 focus:ring-epic-lime outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-epic-blue mb-2">WIDTH (cm)</label>
+                            <input type="number" id="width" value="20" min="1" class="w-full px-4 py-3 rounded-lg bg-epic-charcoal border border-epic-blue/30 text-white font-semibold focus:ring-2 focus:ring-epic-lime outline-none">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-epic-lime text-epic-charcoal px-8 py-4 rounded-lg font-black text-lg btn-primary inline-flex items-center justify-center gap-2 neon-glow">
+                        <i class="fas fa-calculator"></i>
+                        CALCULATE PRICE
+                    </button>
+                </form>
+                
+                <div id="quote-result" class="hidden mt-6 p-6 bg-epic-blue/10 border border-epic-blue/30 rounded-xl">
+                    <div class="text-center">
+                        <div class="text-sm text-epic-blue font-bold mb-2">ESTIMATED PRICE</div>
+                        <div id="quote-price" class="text-5xl font-black text-epic-lime mb-4">R0</div>
+                        <div id="quote-details" class="text-sm text-gray-400 mb-4"></div>
+                        <a id="book-whatsapp" href="#" target="_blank" class="inline-flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-lg font-bold btn-primary w-full justify-center">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                            BOOK VIA WHATSAPP
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="banner-item">
-      <svg class="banner-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-      CIPC Registered · BBBEE Level 1
+</section>
+
+<!-- Services Grid with Icons -->
+<section id="services" class="py-20 lg:py-28 bg-epic-charcoal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <div class="inline-block text-epic-blue font-bold text-sm uppercase tracking-wider mb-4">OUR SERVICES</div>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6">
+                Service Tiers That <span class="text-gradient">Scale</span>
+            </h2>
+            <p class="text-lg text-gray-400">
+                From urgent same-day to bulk business logistics — choose your speed.
+            </p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Same Day -->
+            <div class="bg-gray-900/50 border border-epic-lime/30 rounded-2xl p-8 card-hover neon-glow">
+                <div class="bg-epic-lime/20 w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                    <i class="fas fa-bolt text-3xl text-epic-lime"></i>
+                </div>
+                <h3 class="text-xl font-black text-white mb-3">SAME DAY</h3>
+                <p class="text-gray-400 mb-4 text-sm">12:00 PM cut-off. Boksburg → Sandton → JHB East. When speed matters most.</p>
+                <div class="flex items-center gap-2 text-sm font-bold text-epic-lime mb-4">
+                    <i class="fas fa-clock"></i>
+                    From R60
+                </div>
+                <a href="https://wa.me/27691711112?text=Hi,%20I%20need%20SAME%20DAY%20delivery" target="_blank" class="flex items-center gap-2 text-sm font-bold text-epic-lime hover:text-white transition">
+                    <i class="fab fa-whatsapp"></i>
+                    Book Now
+                </a>
+            </div>
+            
+            <!-- Express -->
+            <div class="bg-gray-900/50 border border-epic-blue/30 rounded-2xl p-8 card-hover blue-glow">
+                <div class="bg-epic-blue/20 w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                    <i class="fas fa-rocket text-3xl text-epic-blue"></i>
+                </div>
+                <h3 class="text-xl font-black text-white mb-3">EXPRESS</h3>
+                <p class="text-gray-600 mb-4">24-48hr guaranteed. Reliable overnight across East JHB. Cost-effective.</p>
+                <div class="flex items-center gap-2 text-sm font-bold text-epic-blue mb-4">
+                    <i class="fas fa-shield-alt"></i>
+                    Guaranteed
+                </div>
+                <a href="https://wa.me/27691711112?text=Hi,%20I%20need%20EXPRESS%20delivery" target="_blank" class="flex items-center gap-2 text-sm font-bold text-epic-blue hover:text-white transition">
+                    <i class="fab fa-whatsapp"></i>
+                    Get Quote
+                </a>
+            </div>
+            
+            <!-- E-commerce -->
+            <div class="bg-gray-900/50 border border-epic-lime/30 rounded-2xl p-8 card-hover neon-glow">
+                <div class="bg-epic-lime/20 w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                    <i class="fas fa-boxes text-3xl text-epic-lime"></i>
+                </div>
+                <h3 class="text-xl font-black text-white mb-3">E-COMMERCE</h3>
+                <p class="text-gray-600 mb-4">Pick, pack, dispatch. Full fulfilment for online stores. API ready.</p>
+                <div class="flex items-center gap-2 text-sm font-bold text-epic-lime mb-4">
+                    <i class="fas fa-store"></i>
+                    Shopify/Woo
+                </div>
+                <a href="https://wa.me/27691711112?text=Hi,%20I%20need%20E-COMMERCE%20fulfilment" target="_blank" class="flex items-center gap-2 text-sm font-bold text-epic-lime hover:text-white transition">
+                    <i class="fab fa-whatsapp"></i>
+                    Integrate
+                </a>
+            </div>
+            
+            <!-- Business -->
+            <div class="bg-gray-900/50 border border-epic-blue/30 rounded-2xl p-8 card-hover blue-glow">
+                <div class="bg-epic-blue/20 w-16 h-16 rounded-2xl flex items-center justify-center mb-6">
+                    <i class="fas fa-building text-3xl text-epic-blue"></i>
+                </div>
+                <h3 class="text-xl font-black text-white mb-3">BUSINESS</h3>
+                <p class="text-gray-600 mb-4">Scheduled SME runs. Daily/weekly contracts. Bulk discounts.</p>
+                <div class="flex items-center gap-2 text-sm font-bold text-epic-blue mb-4">
+                    <i class="fas fa-calendar"></i>
+                    Scheduled
+                </div>
+                <a href="https://wa.me/27691711112?text=Hi,%20I%20need%20BUSINESS%20account%20setup" target="_blank" class="flex items-center gap-2 text-sm font-bold text-epic-blue hover:text-white transition">
+                    <i class="fab fa-whatsapp"></i>
+                    Open Account
+                </a>
+            </div>
+        </div>
     </div>
-    <div class="banner-item">
-      <svg class="banner-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-      WhatsApp & Web Booking
+</section>
+
+<!-- Client Dashboard Section -->
+<section id="business" class="py-20 lg:py-28 bg-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <div class="inline-block text-epic-lime font-bold text-sm uppercase tracking-wider mb-4">BUSINESS SOLUTIONS</div>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6">
+                    Client Dashboard for <span class="text-gradient">Bulk Shipping</span>
+                </h2>
+                <p class="text-lg text-gray-400 mb-8">
+                    Manage bulk shipments, view past invoices, track multiple parcels, and download reports. Built for SMEs and e-commerce stores shipping 10+ packages daily.
+                </p>
+                
+                <div class="space-y-4 mb-8">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-epic-blue/20 p-3 rounded-xl flex-shrink-0">
+                            <i class="fas fa-chart-line text-epic-blue"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white mb-1">Bulk Upload CSV</h4>
+                            <p class="text-gray-400 text-sm">Import 100+ deliveries at once. Auto-calculate rates.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="bg-epic-lime/20 p-3 rounded-xl flex-shrink-0">
+                            <i class="fas fa-file-invoice text-epic-lime"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white mb-1">Invoice History</h4>
+                            <p class="text-gray-400 text-sm">Download VAT invoices. Monthly statements. Payment tracking.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="bg-epic-blue/20 p-3 rounded-xl flex-shrink-0">
+                            <i class="fas fa-map-marked-alt text-epic-blue"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-white mb-1">Live Fleet Map</h4>
+                            <p class="text-gray-400 text-sm">Track all your deliveries on one map. Real-time GPS.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <button onclick="openDashboard()" class="bg-epic-lime text-epic-charcoal px-8 py-4 rounded-lg font-black text-lg btn-primary inline-flex items-center justify-center gap-2 neon-glow">
+                    <i class="fas fa-sign-in-alt"></i>
+                    LOGIN TO DASHBOARD
+                </button>
+            </div>
+            
+            <div class="bg-gradient-to-br from-epic-blue/20 to-epic-lime/20 p-1 rounded-2xl blue-glow">
+                <div class="bg-epic-charcoal rounded-2xl p-8">
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                        <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                        <div class="flex-1 text-center text-xs text-gray-500 font-mono">dashboard.epiccouriers.co.za</div>
+                    </div>
+                    <img src="logo.png" alt="Dashboard" class="w-full h-auto rounded-lg mb-4 opacity-50">
+                    <div class="space-y-3">
+                        <div class="h-4 bg-gray-800 rounded w-3/4"></div>
+                        <div class="h-4 bg-gray-800 rounded w-1/2"></div>
+                        <div class="h-10 bg-epic-lime/20 border border-epic-lime/30 rounded-lg flex items-center justify-center">
+                            <span class="text-epic-lime font-bold text-sm">BULK UPLOAD READY</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="banner-item">
-      <svg class="banner-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-      100% Black-Owned Business
-    </div>
-  </div>
+</section>
 
-  <div class="white-section" id="services">
-    <div class="container">
-      <div class="section-label">— WHAT WE DELIVER</div>
-      <h2 class="section-title">Precision Services<br><span class="orange">For Every Need.</span></h2>
-      <p class="section-desc">Built for Gauteng SMEs and online stores underserved by large couriers. No volume minimums. Transparent pricing. Real accountability.</p>
-
-      <div class="service-card">
-        <span class="service-tag">MOST POPULAR</span>
-        <div class="service-icon">⚡</div>
-        <h3>Same-Day Delivery</h3>
-        <div class="subtitle">Delivered today. 12:00 PM cut-off.</div>
-        <p>Door-to-door same-day delivery across Gauteng metros. Book before noon and your parcel moves immediately — with a 98% on-time target.</p>
-        <div class="service-locations">Boksburg · Brakpan · Springs · Benoni · East Rand · Alberton · Germiston · JHB</div>
-      </div>
-
-      <div class="service-card">
-        <span class="service-tag">BUSINESS</span>
-        <div class="service-icon">📋</div>
-        <h3>Scheduled SME Runs</h3>
-        <div class="subtitle">Daily or weekly contracts.</div>
-        <p>No minimum volume. Dedicated account management for SMEs doing 20–200 parcels per month who deserve better than the big couriers offer.</p>
-        <div class="service-locations">Transparent per-km + per-stop pricing, no surcharge shocks</div>
-      </div>
-
-      <div class="service-card">
-        <span class="service-tag">ONLINE SHOPS</span>
-        <div class="service-icon">🛍️</div>
-        <h3>E-commerce Fulfilment</h3>
-        <div class="subtitle">Pick, pack, dispatch.</div>
-        <p>Full last-mile delivery solution for online stores. Proof-of-delivery on every job, live GPS tracking, and instant booking via WhatsApp or web.</p>
-        <div class="service-locations">Shopify · WooCommerce · Custom stores</div>
-      </div>
-
-      <div class="stats-dark">
-        <div class="stat-dark">
-          <h3>660+</h3>
-          <p>Capacity Per Month</p>
+<!-- Contact Section -->
+<section id="contact" class="py-20 lg:py-28 bg-epic-charcoal">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <div class="inline-block text-epic-lime font-bold text-sm uppercase tracking-wider mb-4">GET IN TOUCH</div>
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-6">
+                Ready for <span class="text-gradient">Cyber-Speed</span>?
+            </h2>
+            <p class="text-lg text-gray-400">
+                No call centres — direct line. WhatsApp or call for instant quotes.
+            </p>
         </div>
-        <div class="stat-dark">
-          <h3>98%</h3>
-          <p>On-Time Target</p>
-        </div>
-        <div class="stat-dark">
-          <h3>5</h3>
-          <p>Coverage Areas</p>
-        </div>
-        <div class="stat-dark">
-          <h3>12 PM</h3>
-          <p>Same-Day Cut-off</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="network">
-    <div class="container">
-      <div class="section-label">— THE GAUTENG PULSE</div>
-      <h2>Your Delivery<br><span class="orange">Network.</span></h2>
-      <p>Same-day cut-off 12:00 PM. Serving Boksburg, Benoni, Brakpan, Springs, East Rand, Alberton, Germiston and greater Johannesburg. Select an area to explore.</p>
-      
-      <div class="map-container">
-        <div class="map-dots">
-          <div class="dot" style="top: 40%; left: 65%;"><span class="dot-label">JHB</span></div>
-          <div class="dot" style="top: 50%; left: 55%;"><span class="dot-label">Germiston</span></div>
-          <div class="dot" style="top: 45%; left: 75%;"><span class="dot-label">Benoni</span></div>
-          <div class="dot" style="top: 55%; left: 70%;"><span class="dot-label">East Rand</span></div>
-          <div class="dot active" style="top: 60%; left: 50%;"><span class="dot-label">Boksburg</span></div>
-          <div class="dot" style="top: 50%; left: 80%;"><span class="dot-label">Brakpan</span></div>
-          <div class="dot" style="top: 55%; left: 85%;"><span class="dot-label">Springs</span></div>
-          <div class="dot" style="top: 70%; left: 60%;"><span class="dot-label">Alberton</span></div>
-        </div>
-        <p style="color: #64748B; font-size: 0.8rem; text-align: center; margin-top: 20px;">Click an area to explore</p>
-      </div>
-
-      <div class="area-info">
-        <span class="zone-tag">ZONE A</span>
-        <h3>Boksburg</h3>
-        <span class="time">1-2 hours</span>
-        <p><strong>Our Home Base</strong></p>
-        <p>Fastest coverage from our Boksburg depot. Same-day guaranteed for all local pickups.</p>
-        <a href="PASTE_YOUR_BASE44_LINK_HERE" class="btn-primary" style="margin-top: 16px;">Book delivery to Boksburg</a>
-      </div>
-
-      <div class="area-list">
-        <div class="area-row">
-          <span class="area-name">Boksburg</span>
-          <span class="area-time">1-2 hours</span>
-          <span class="area-zone">Zone A</span>
-        </div>
-        <div class="area-row">
-          <span class="area-name">East Rand</span>
-          <span class="area-time">1-3 hours</span>
-          <span class="area-zone">Zone A</span>
-        </div>
-        <div class="area-row">
-          <span class="area-name">Germiston</span>
-          <span class="area-time">2-3 hours</span>
-          <span class="area-zone">Zone B</span>
-        </div>
-        <div class="area-row">
-          <span class="area-name">Alberton</span>
-          <span class="area-time">2-3 hours</span>
-          <span class="area-zone">Zone B</span>
-        </div>
-        <div class="area-row">
-          <span class="area-name">Johannesburg</span>
-          <span class="area-time">3-4 hours</span>
-          <span class="area-zone">Zone C</span>
-        </div>
-        <div class="area-row">
-          <span class="area-name">Brakpan</span>
-          <span class="area-time">1-2 hours</span>
-          <span class="area-zone">Zone A</span>
-        </div>
-        <div class="area-row">
-          <span class="area-name">Springs</span>
-          <span class="area-time">2-3 hours</span>
-          <span class="area-zone">Zone B</span>
-        </div>
-        <div class="area-row">
-          <span class="area-name">Benoni</span>
-          <span class="area-time">1-2 hours</span>
-          <span class="area-zone">Zone A</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="process">
-    <div class="container">
-      <div class="section-label">— THE PROCESS</div>
-      <h2 class="section-title">Four Steps to<br><span class="orange">Delivered.</span></h2>
-      
-      <div class="process-step">
-        <div class="step-number">01</div>
-        <h3>Book by 12 PM</h3>
-        <p>Submit your booking online or via WhatsApp before noon. Pickup and delivery details confirmed instantly.</p>
-      </div>
-      
-      <div class="process-step">
-        <div class="step-number">02</div>
-        <h3>We Dispatch</h3>
-        <p>A dedicated Epic Couriers driver is assigned and en route to your pickup address — same day.</p>
-      </div>
-      
-      <div class="process-step">
-        <div class="step-number">03</div>
-        <h3>Live Tracking</h3>
-        <p>Your parcel is GPS-tracked from collection to drop-off. You and your recipient stay informed every step.</p>
-      </div>
-      
-      <div class="process-step">
-        <div class="step-number">04</div>
-        <h3>Delivered + POD</h3>
-        <p>Proof of delivery is captured and sent to you immediately. Every. Single. Job.</p>
-      </div>
-      
-      <a href="PASTE_YOUR_BASE44_LINK_HERE" class="btn-primary">Start Your First Delivery</a>
-    </div>
-  </div>
-
-  <div class="booking">
-    <div class="container">
-      <div class="section-label">— FRICTIONLESS INTAKE</div>
-      <h2 class="section-title">Book a Delivery<br><span class="orange">Right Now.</span></h2>
-      <p class="section-desc">Same-day pickup available. Takes under 2 minutes.</p>
-      
-      <div class="form-steps">
-        <div class="form-step active">
-          <div class="form-step-num">1</div>
-          <label>Contact</label>
-        </div>
-        <div class="form-step">
-          <div class="form-step-num">2</div>
-          <label>Pickup</label>
-        </div>
-        <div class="form-step">
-          <div class="form-step-num">3</div>
-          <label>Delivery</label>
-        </div>
-        <div class="form-step">
-          <div class="form-step
+        
+        <div class="grid lg:grid-cols-5 gap-8">
+            <div class="lg:col-span-2 space-y-6">
+                <div class="bg-gray-900/50 border border-epic-blue/30 rounded-2xl p-8">
+                    <h3 class="text-xl font-black text-white mb-6">Contact Info</h3>
+                    
+                    <div class="space-y-5">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-epic-blue/20 p-3 rounded-xl flex-shrink-0">
+                                <i class="fas fa-phone text-epic-blue"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-white mb-1">Phone / WhatsApp</div>
+                                <a href="tel:+27691711112" class="text-gray-400 hover:text-epic-lime">+27 69 171 1112</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="bg-epic-lime/20 p-3 rounded-xl flex-shrink-0">
+                                <i class="fas fa-envelope text-epic-lime"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-white mb-1">Email</div>
+                                <a href="mailto:info@epiccouriers.co.za" class="text-gray-400 hover:text-epic-lime break-all">info@epiccouriers.co.za</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="bg-epic-blue/20 p-3 rounded-xl flex-shrink-0">
+                                <i class="fas fa-globe text-epic-blue"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-white mb-1">Website</div>
+                                <a href="https://www.epiccouriers.co.za" class="text-gray-400 hover:text-epic-lime">www.epiccouriers.co.za</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-4">
+                            <div class="bg-epic-lime/20 p-3 rounded-xl flex-shrink-0">
+                                <i class="fas fa-clock text-epic-lime"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-white mb-1">Hours</div>
+                                <div class="text-gray-400 text-sm">Mon–Fri: 7am–5pm<br>Sat: 8am–1pm<br>Sun: Closed</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 pt-6 border-t border-epic-blue/20">
+                        <a href="https://wa.me/27691711112?text=Hi%20Epic%20Couriers,%20I%20need%20help" target="_blank" class="flex items-center justify-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-lg font-black btn-primary w-full">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                            WHATSAPP US
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="lg:col-span-3">
+                <div class="bg-gray-900/50 border border-epic-blue/30 rounded-2xl p-8">
+                    <h3 class="text-xl font-black text-white mb-6">Send Us a Message</h3>
+                    <form id="contact-form" class="space-y-5">
+                        <div class="grid sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-sm font-bold text-epic-blue mb-2">FULL NAME *</label>
+                                <input type="text" required class="w-full px-4 py-3 rounded-lg bg-epic-charcoal border border-epic-blue/30 text-white font-semibold focus:ring-2 focus:ring-epic-lime outline-none" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-epic-blue mb-2">COMPANY</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-lg bg-epic-charcoal border border-epic-blue/30 text-white font-semibold focus:ring-2 focus:ring-epic-lime outline-none" placeholder="Your Company">
+                            </div>
+                        </div>
+                        
+                        <div class="grid sm:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-sm font-bold text-epic-blue mb-2">EMAIL *</label>
+                                <input type="email" required class="w-full px-4 py-3 rounded-lg bg-epic-charcoal border border-epic-blue/30 text-white font-semibold focus:ring-2 focus:ring-epic-lime outline-none" placeholder="john@company.com">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-epic-blue mb-2">PHONE *</label>
+                                <input type="tel" required class="w-full px-4 py-3 rounded-lg bg-epic-charcoal border border-epic-blue/
