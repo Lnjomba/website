@@ -23,7 +23,7 @@
     <style>
         html { scroll-behavior: smooth; }
         
-        /* STRONG FADING ANIMATION FOR BACKGROUND */
+        /* FADING ANIMATION FOR BACKGROUNDS */
         @keyframes fadeInOut {
             0% { opacity: 0; }
             20% { opacity: 0.3; }
@@ -38,6 +38,10 @@
         .fade-bakkies {
             animation: fadeInOut 16s infinite;
             animation-delay: 8s;
+        }
+
+        .fade-van {
+            animation: fadeInOut 12s infinite;
         }
     </style>
 </head>
@@ -93,7 +97,6 @@
                             Call +27 69 171 1112
                         </a>
                     </div>
-                </div>
                 <div>
                     <img src="van.jpg" alt="Epic Couriers delivery van" class="rounded-2xl shadow-2xl w-full">
                 </div>
@@ -218,11 +221,20 @@
         </div>
     </section>
 
-    <!-- Founder -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-6">
+    <!-- FOUNDER SECTION - NOW WITH VAN.JPG FADING IN BACKGROUND -->
+    <section class="py-20 bg-white relative overflow-hidden">
+        <!-- van.jpg fading in background behind founder -->
+        <div class="absolute inset-0 z-0 fade-van">
+            <img src="van.jpg" alt="" class="w-full h-full object-cover">
+        </div>
+        <!-- White overlay for readability -->
+        <div class="absolute inset-0 bg-white/90 z-10"></div>
+        
+        <div class="container mx-auto px-6 relative z-20">
             <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div><img src="founder.jpg" alt="Luvuyo Njomba - Founder of Epic Couriers" class="rounded-2xl shadow-2xl w-full"></div>
+                <div>
+                    <img src="founder.jpg" alt="Luvuyo Njomba - Founder of Epic Couriers" class="rounded-2xl shadow-2xl w-full">
+                </div>
                 <div>
                     <p class="text-epic-blue font-bold mb-2">Luvuyo Njomba — Founder of Epic Couriers</p>
                     <h2 class="text-3xl md:text-5xl font-black text-epic-black mb-6">BUILT FROM<br>THE GROUND UP.</h2>
@@ -272,7 +284,6 @@
                         <li><a href="https://www.epiccouriers.co.za" class="hover:text-epic-blue">www.epiccouriers.co.za</a></li>
                     </ul>
                 </div>
-            </div>
             <div class="border-t border-gray-200 pt-8 text-center text-sm text-gray-500">
                 <p>© 2026 Epic Couriers (Pty) Ltd. All rights reserved. Boksburg, Gauteng.</p>
                 <p class="mt-2">Reg: 2025/424904/07 · BBBEE Level 1 · Mon–Fri 07:00–17:00 · Sat 08:00–13:00</p>
