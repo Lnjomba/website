@@ -3,27 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Epic Couriers - Fast Delivery Boksburg | Same-Day Courier Gauteng</title>
-    <meta name="description" content="Epic Couriers Boksburg. Same-day delivery, document courier, bulk transport across Gauteng. Book via WhatsApp. Call +27 69 171 1112 or email info@epiccouriers.co.za">
+    <title>Epic Couriers - Same-Day Delivery Gauteng | The Last Mile, First Class</title>
+    <meta name="description" content="Epic Couriers: Same-day delivery Gauteng with 12:00 PM cut-off, 98% on-time target. For SMEs & online stores. Call/WhatsApp +27 69 171 1112 or email info@epiccouriers.co.za">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'epic-blue': '#1E40AF',      // Blue from your logo
-                        'epic-yellow': '#FBBF24',    // Yellow from your logo  
-                        'epic-black': '#111827',     // Black from your logo
+                        'epic-blue': '#1E40AF',      
+                        'epic-yellow': '#FBBF24',    
+                        'epic-black': '#111827',     
                         'epic-light': '#F9FAFB',
                     },
                     animation: {
-                        'bg-fade': 'bgFade 12s ease-in-out infinite',
+                        'bg-crossfade': 'bgCrossfade 16s ease-in-out infinite',
                     },
                     keyframes: {
-                        bgFade: {
-                          '0%, 100%': { opacity: '0' },
-                          '25%, 75%': { opacity: '0.15' },
-                          '50%': { opacity: '0' },
+                        bgCrossfade: {
+                          '0%, 100%': { opacity: '0.12' },
+                          '25%': { opacity: '0' },
+                          '50%': { opacity: '0.12' },
+                          '75%': { opacity: '0' },
                         }
                     }
                 }
@@ -47,100 +48,222 @@
                     </h1>
                 </div>
                 <a href="#booking" class="bg-epic-blue hover:bg-blue-800 text-white font-bold py-2 px-4 md:px-6 rounded-full transition duration-300 text-sm md:text-base">
-                    Book Pickup
+                    Book a Delivery
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section with FADING building.jpg + bakkies.jpg -->
+    <!-- Hero: THE LAST MILE, FIRST CLASS with FADING BACKGROUNDS -->
     <section class="relative py-20 md:py-32 overflow-hidden bg-white">
-        <!-- building.jpg fading in/out -->
-        <div class="absolute inset-0 z-0 animate-bg-fade">
+        <!-- building.jpg fading -->
+        <div class="absolute inset-0 z-0 animate-bg-crossfade">
             <img src="building.jpg" alt="" class="w-full h-full object-cover">
         </div>
         <!-- bakkies.jpg fading opposite -->
-        <div class="absolute inset-0 z-0" style="animation: bgFade 12s ease-in-out infinite reverse;">
+        <div class="absolute inset-0 z-0" style="animation: bgCrossfade 16s ease-in-out infinite; animation-delay: -8s;">
             <img src="bakkies.jpg" alt="" class="w-full h-full object-cover">
         </div>
-        <!-- White overlay so text stays readable -->
+        <!-- White overlay for readability -->
         <div class="absolute inset-0 bg-gradient-to-b from-white via-white/95 to-white z-10"></div>
         
         <div class="container mx-auto px-6 relative z-20">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div>
-                    <h2 class="text-4xl md:text-6xl font-black text-epic-black mb-6 leading-tight">
-                        Fast, Reliable <span class="text-epic-blue">Courier Services</span> in Boksburg
+                    <p class="text-epic-blue font-bold mb-4">Fast. Reliable. Professional. · Same-Day Gauteng</p>
+                    <h2 class="text-4xl md:text-7xl font-black text-epic-black mb-6 leading-tight">
+                        THE LAST<br>MILE,<br><span class="text-epic-blue">FIRST CLASS.</span>
                     </h2>
                     <p class="text-lg md:text-xl text-gray-600 mb-8">
-                        Same-day delivery, document courier, and bulk transport. Trusted by businesses across Gauteng.
+                        Epic Couriers is a Gauteng-based, tech-enabled courier service built for SMEs and online stores underserved by large couriers. Same-day delivery with a 12:00 PM cut-off, 98% on-time target.
                     </p>
-                    <a href="#booking" class="bg-epic-blue hover:bg-blue-800 text-white font-bold py-4 px-8 rounded-full text-lg transition duration-300 inline-block shadow-lg">
-                        Book Now on WhatsApp
-                    </a>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#booking" class="bg-epic-blue hover:bg-blue-800 text-white font-bold py-4 px-8 rounded-full text-lg transition duration-300 inline-block shadow-lg text-center">
+                            Book a Delivery
+                        </a>
+                        <a href="#services" class="bg-white border-2 border-epic-blue text-epic-blue hover:bg-epic-blue hover:text-white font-bold py-4 px-8 rounded-full text-lg transition duration-300 inline-block text-center">
+                            Our Services
+                        </a>
+                    </div>
                 </div>
                 <div>
-                    <img src="van.jpg" alt="Epic Couriers Fleet" class="rounded-2xl shadow-2xl w-full">
+                    <img src="van.jpg" alt="Epic Couriers delivery van" class="rounded-2xl shadow-2xl w-full">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Meet the Founder Section -->
-    <section id="founder" class="py-20 bg-epic-light">
+    <!-- Stats Bar -->
+    <section class="py-12 bg-epic-light">
         <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-3xl md:text-5xl font-black text-epic-black mb-12">Meet the Founder</h2>
-                <div class="bg-white rounded-3xl p-8 md:p-12 shadow-lg border-t-4 border-epic-yellow">
-                    <img src="founder.jpg" alt="Luvuyo Njomba - Founder of Epic Couriers" class="w-40 h-40 rounded-full mx-auto mb-6 object-cover shadow-lg border-4 border-epic-blue">
-                    <h3 class="text-2xl md:text-3xl font-black text-epic-black mb-2">Luvuyo Njomba</h3>
-                    <p class="text-epic-blue font-bold mb-4">Founder & CEO</p>
-                    <p class="text-gray-600 text-lg leading-relaxed">
-                        "I started Epic Couriers to solve one problem: late deliveries. Based in Boksburg, we treat every parcel like it's our own. 
-                        From urgent documents to bulk freight, my team and I guarantee speed, safety, and WhatsApp updates every step of the way."
-                    </p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-3xl md:text-4xl font-black text-epic-blue">12:00 PM</div>
+                    <div class="text-gray-600 font-semibold">Same-Day Cut-off</div>
+                </div>
+                <div>
+                    <div class="text-3xl md:text-4xl font-black text-epic-blue">8 Areas</div>
+                    <div class="text-gray-600 font-semibold">Gauteng Coverage</div>
+                </div>
+                <div>
+                    <div class="text-3xl md:text-4xl font-black text-epic-blue">98%</div>
+                    <div class="text-gray-600 font-semibold">On-Time Target</div>
+                </div>
+                <div>
+                    <div class="text-sm md:text-base font-bold text-epic-black">Proof of Delivery on Every Job<br>CIPC Registered · BBBEE Level 1<br>WhatsApp & Web Booking<br>100% Black-Owned Business</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
+    <!-- Services -->
+    <section id="services" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <p class="text-epic-blue font-bold mb-2">— What We Deliver</p>
+                <h2 class="text-3xl md:text-5xl font-black text-epic-black">Precision Services<br>For Every Need.</h2>
+                <p class="text-gray-600 mt-4 max-w-2xl mx-auto">Built for Gauteng SMEs and online stores underserved by large couriers. No volume minimums. Transparent pricing. Real accountability.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-epic-light p-8 rounded-2xl shadow-lg border-t-4 border-epic-yellow relative">
+                    <div class="absolute top-4 right-4 bg-epic-yellow text-epic-black text-xs font-bold px-3 py-1 rounded-full">Most Popular</div>
+                    <h3 class="text-2xl font-black mb-3 text-epic-black mt-4">Same-Day Delivery</h3>
+                    <p class="text-epic-blue font-bold mb-4">Delivered today. 12:00 PM cut-off.</p>
+                    <p class="text-gray-600 mb-4">Door-to-door same-day delivery across Gauteng metros. Book before noon and your parcel moves immediately — with a 98% on-time target.</p>
+                    <p class="text-sm text-gray-500">Boksburg · Brakpan · Springs · Benoni · East Rand · Alberton · Germiston · JHB</p>
+                </div>
+                <div class="bg-epic-light p-8 rounded-2xl shadow-lg border-t-4 border-epic-blue">
+                    <h3 class="text-2xl font-black mb-3 text-epic-black">Scheduled SME Runs</h3>
+                    <p class="text-epic-blue font-bold mb-4">Daily or weekly contracts.</p>
+                    <p class="text-gray-600 mb-4">No minimum volume. Dedicated account management for SMEs doing 20–200 parcels per month who deserve better than the big couriers offer.</p>
+                    <p class="text-sm text-gray-500">Transparent per-km + per-stop pricing, no surcharge shocks</p>
+                </div>
+                <div class="bg-epic-light p-8 rounded-2xl shadow-lg border-t-4 border-epic-blue">
+                    <h3 class="text-2xl font-black mb-3 text-epic-black">E-commerce Fulfilment</h3>
+                    <p class="text-epic-blue font-bold mb-4">Pick, pack, dispatch.</p>
+                    <p class="text-gray-600 mb-4">Full last-mile delivery solution for online stores. Proof-of-delivery on every job, live GPS tracking, and instant booking via WhatsApp or web.</p>
+                    <p class="text-sm text-gray-500">Shopify · WooCommerce · Custom stores</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="py-12 bg-epic-black text-white">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-3xl md:text-4xl font-black text-epic-yellow">660+</div>
+                    <div class="text-gray-300">Capacity Per Month</div>
+                </div>
+                <div>
+                    <div class="text-3xl md:text-4xl font-black text-epic-yellow">98%</div>
+                    <div class="text-gray-300">On-Time Target</div>
+                </div>
+                <div>
+                    <div class="text-3xl md:text-4xl font-black text-epic-yellow">5</div>
+                    <div class="text-gray-300">Coverage Areas</div>
+                </div>
+                <div>
+                    <div class="text-3xl md:text-4xl font-black text-epic-yellow">12 PM</div>
+                    <div class="text-gray-300">Same-Day Cut-off</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coverage -->
+    <section class="py-20 bg-epic-light">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <p class="text-epic-blue font-bold mb-2">— The Gauteng Pulse</p>
+                <h2 class="text-3xl md:text-5xl font-black text-epic-black">Your Delivery<br>Network.</h2>
+                <p class="text-gray-600 mt-4">Same-day cut-off 12:00 PM. Serving Boksburg, Benoni, Brakpan, Springs, Vosloorus, Katlehong, Spruitview, Dawn Park, Elspark, Elsburg, Alberton, Germiston and greater Johannesburg.</p>
+            </div>
+            <div class="bg-white rounded-2xl p-8 shadow-lg">
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 text-center text-sm">
+                    <div class="font-bold text-epic-blue">Zone A</div>
+                    <div>Boksburg<br><span class="text-gray-500">1–2 hours</span></div>
+                    <div>East Rand<br><span class="text-gray-500">1–3 hours</span></div>
+                    <div>Brakpan<br><span class="text-gray-500">1–2 hours</span></div>
+                    <div>Benoni<br><span class="text-gray-500">1–2 hours</span></div>
+                    <div>Vosloorus<br><span class="text-gray-500">1–2 hours</span></div>
+                    <div>Spruitview<br><span class="text-gray-500">1–2 hours</span></div>
+                    <div class="font-bold text-epic-blue">Zone B</div>
+                    <div>Germiston<br><span class="text-gray-500">2–3 hours</span></div>
+                    <div>Alberton<br><span class="text-gray-500">2–3 hours</span></div>
+                    <div>Springs<br><span class="text-gray-500">2–3 hours</span></div>
+                    <div>Katlehong<br><span class="text-gray-500">2–3 hours</span></div>
+                    <div>Elsburg<br><span class="text-gray-500">2–3 hours</span></div>
+                    <div></div>
+                    <div class="font-bold text-epic-blue">Zone C</div>
+                    <div>Johannesburg<br><span class="text-gray-500">3–4 hours</span></div>
+                    <div>Dawn Park<br><span class="text-gray-500">1–2 hours</span></div>
+                    <div>Elspark<br><span class="text-gray-500">1–2 hours</span></div>
+                    <div></div><div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
     <section class="py-20 bg-white">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-5xl font-black text-center text-epic-black mb-16">Our Services</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-epic-light p-8 rounded-2xl shadow-lg text-center border-b-4 border-epic-yellow">
-                    <div class="text-5xl mb-4">📦</div>
-                    <h3 class="text-2xl font-bold mb-3 text-epic-black">Same-Day Delivery</h3>
-                    <p class="text-gray-600">Urgent parcels across Boksburg & Gauteng. Picked up and delivered today.</p>
+            <div class="text-center mb-16">
+                <p class="text-epic-blue font-bold mb-2">— The Process</p>
+                <h2 class="text-3xl md:text-5xl font-black text-epic-black">Four Steps to<br>Delivered.</h2>
+            </div>
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="bg-epic-blue text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-black mx-auto mb-4">01</div>
+                    <h3 class="font-black text-xl mb-2">Book by 12 PM</h3>
+                    <p class="text-gray-600">Submit your booking online or via WhatsApp before noon. Pickup and delivery details confirmed instantly.</p>
                 </div>
-                <div class="bg-epic-light p-8 rounded-2xl shadow-lg text-center border-b-4 border-epic-yellow">
-                    <div class="text-5xl mb-4">📄</div>
-                    <h3 class="text-2xl font-bold mb-3 text-epic-black">Document Courier</h3>
-                    <p class="text-gray-600">Secure, tracked delivery for contracts, tenders, and legal documents.</p>
+                <div class="text-center">
+                    <div class="bg-epic-blue text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-black mx-auto mb-4">02</div>
+                    <h3 class="font-black text-xl mb-2">We Dispatch</h3>
+                    <p class="text-gray-600">A dedicated Epic Couriers driver is assigned and en route to your pickup address — same day.</p>
                 </div>
-                <div class="bg-epic-light p-8 rounded-2xl shadow-lg text-center border-b-4 border-epic-yellow">
-                    <div class="text-5xl mb-4">🚚</div>
-                    <h3 class="text-2xl font-bold mb-3 text-epic-black">Bulk Transport</h3>
-                    <p class="text-gray-600">Furniture, stock, and large items. Vans available for business contracts.</p>
+                <div class="text-center">
+                    <div class="bg-epic-blue text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-black mx-auto mb-4">03</div>
+                    <h3 class="font-black text-xl mb-2">Live Tracking</h3>
+                    <p class="text-gray-600">Your parcel is GPS-tracked from collection to drop-off. You and your recipient stay informed every step.</p>
                 </div>
+                <div class="text-center">
+                    <div class="bg-epic-blue text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-black mx-auto mb-4">04</div>
+                    <h3 class="font-black text-xl mb-2">Delivered + POD</h3>
+                    <p class="text-gray-600">Proof of delivery is captured and sent to you immediately. Every. Single. Job.</p>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="#booking" class="bg-epic-blue hover:bg-blue-800 text-white font-bold py-4 px-8 rounded-full text-lg transition duration-300 inline-block">
+                    Start Your First Delivery
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Booking Form Section -->
+    <!-- Booking Form -->
     <section id="booking" class="py-20 bg-epic-light">
         <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <p class="text-epic-blue font-bold mb-2">— Frictionless Intake</p>
+                <h2 class="text-3xl md:text-5xl font-black text-epic-black">Book a Delivery<br>Right Now.</h2>
+                <p class="text-gray-600 mt-4">Same-day pickup available. Takes under 2 minutes.</p>
+            </div>
             <div class="max-w-2xl mx-auto bg-white rounded-3xl p-8 md:p-12 shadow-xl">
-                <h2 class="text-3xl md:text-4xl font-black text-center text-epic-black mb-8">Book Your Delivery</h2>
                 <form id="bookingForm" class="space-y-6">
                     <div>
-                        <label class="block text-sm font-bold text-gray-700 mb-2">Your Name *</label>
-                        <input type="text" id="name" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-epic-blue focus:border-transparent">
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Full Name *</label>
+                        <input type="text" id="name" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-epic-blue focus:border-transparent" placeholder="John Doe">
                     </div>
                     <div>
                         <label class="block text-sm font-bold text-gray-700 mb-2">Phone Number *</label>
-                        <input type="tel" id="phone" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-epic-blue focus:border-transparent">
+                        <input type="tel" id="phone" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-epic-blue focus:border-transparent" placeholder="+27 82 000 0000">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Email Address</label>
+                        <input type="email" id="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-epic-blue focus:border-transparent" placeholder="you@company.co.za">
                     </div>
                     <div>
                         <label class="block text-sm font-bold text-gray-700 mb-2">Pickup Address *</label>
@@ -162,17 +285,79 @@
         </div>
     </section>
 
-    <!-- Footer with EMAIL RESTORED -->
-    <footer class="bg-epic-black text-white py-12">
-        <div class="container mx-auto px-6 text-center">
-            <h3 class="text-2xl font-black mb-4">EPIC <span class="text-epic-yellow">COURIERS</span></h3>
-            <p class="text-gray-400 mb-6">Boksburg, Gauteng | Reg: 2025/398751/07</p>
-            <div class="flex flex-col md:flex-row justify-center items-center space-y-3 md:space-y-0 md:space-x-6 mb-6">
-                <a href="https://wa.me/27691711112" class="hover:text-epic-yellow transition">WhatsApp: +27 69 171 1112</a>
-                <span class="hidden md:block text-gray-600">|</span>
-                <a href="mailto:info@epiccouriers.co.za" class="hover:text-epic-yellow transition">Email: info@epiccouriers.co.za</a>
+    <!-- Founder -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <img src="founder.jpg" alt="Luvuyo Njomba - Founder of Epic Couriers" class="rounded-2xl shadow-2xl w-full">
+                </div>
+                <div>
+                    <p class="text-epic-blue font-bold mb-2">Luvuyo Njomba — Founder of Epic Couriers</p>
+                    <h2 class="text-3xl md:text-5xl font-black text-epic-black mb-6">BUILT FROM<br>THE GROUND UP.</h2>
+                    <p class="text-gray-600 text-lg mb-6">
+                        Epic Couriers was born from a simple frustration — small businesses in Gauteng deserved better. Luvuyo Njomba founded the company with one van, one promise, and an unwavering belief that the last mile should be first class.
+                    </p>
+                    <p class="text-xl font-bold text-epic-black mb-8">"We don't just deliver parcels. We deliver on promises. Every single day."</p>
+                    <div class="grid grid-cols-3 gap-4 text-center">
+                        <div><div class="text-2xl font-black text-epic-blue">2025</div><div class="text-sm text-gray-600">Est.</div></div>
+                        <div><div class="text-2xl font-black text-epic-blue">98%</div><div class="text-sm text-gray-600">On-Time Rate</div></div>
+                        <div><div class="text-2xl font-black text-epic-blue">8</div><div class="text-sm text-gray-600">Gauteng Areas</div></div>
+                    </div>
+                </div>
             </div>
-            <p class="text-gray-500 text-sm">© 2025 Epic Couriers (Pty) Ltd. All rights reserved.</p>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 bg-epic-black text-white text-center">
+        <div class="container mx-auto px-6">
+            <p class="text-epic-yellow font-bold mb-4">Ready to ship?</p>
+            <h2 class="text-4xl md:text-6xl font-black mb-8">LET'S MOVE<br>YOUR FREIGHT.</h2>
+            <a href="#booking" class="bg-epic-yellow hover:bg-yellow-500 text-epic-black font-bold py-4 px-8 rounded-full text-lg transition duration-300 inline-block">
+                Book a Delivery
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-2xl font-black mb-4">EPIC <span class="text-epic-blue">COURIERS</span></h3>
+                    <p class="text-gray-600">Fast. Reliable. Professional.<br>Same-day delivery for Gauteng SMEs and online stores. No minimums. No surcharge shocks.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-epic-black">— Services</h4>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>Same-Day Express</li>
+                        <li>SME Solutions</li>
+                        <li>E-commerce Fulfillment</li>
+                        <li>Bulk Deliveries</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-epic-black">— Coverage</h4>
+                    <ul class="space-y-2 text-gray-600 text-sm">
+                        <li>Boksburg · East Rand · Alberton</li>
+                        <li>Germiston · Johannesburg · Brakpan</li>
+                        <li>Springs · Benoni</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-epic-black">— Contact Manifest</h4>
+                    <ul class="space-y-2 text-gray-600">
+                        <li>Boksburg, East Rand<br>Gauteng, South Africa</li>
+                        <li><a href="tel:+27691711112" class="hover:text-epic-blue">069 171 1112</a> · Calls & WhatsApp</li>
+                        <li><a href="mailto:info@epiccouriers.co.za" class="hover:text-epic-blue">info@epiccouriers.co.za</a></li>
+                        <li><a href="https://www.epiccouriers.co.za" class="hover:text-epic-blue">www.epiccouriers.co.za</a></li>
+                    </ul>
+                </div>
+            <div class="border-t border-gray-200 pt-8 text-center text-sm text-gray-500">
+                <p>© 2026 Epic Couriers (Pty) Ltd. All rights reserved. Boksburg, Gauteng.</p>
+                <p class="mt-2">Reg: 2025/424904/07 · BBBEE Level 1 · Mon–Fri 07:00–17:00 · Sat 08:00–13:00</p>
+            </div>
         </div>
     </footer>
 
@@ -182,15 +367,16 @@
             
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
             const pickup = document.getElementById('pickup').value;
             const delivery = document.getElementById('delivery').value;
             const details = document.getElementById('details').value;
             
-            const message = `Hi Epic Couriers! New Booking:%0A%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*Pickup:* ${pickup}%0A*Delivery:* ${delivery}%0A*Parcel:* ${details}%0A%0APlease confirm price & pickup time.`;
+            const message = `Hi Epic Couriers! New Booking:%0A%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*Email:* ${email}%0A*Pickup:* ${pickup}%0A*Delivery:* ${delivery}%0A*Parcel:* ${details}%0A%0APlease confirm price & pickup time.`;
             
             window.open(`https://wa.me/27691711112?text=${message}`, '_blank');
         });
     </script>
 
 </body>
-</html>
+</html> 
